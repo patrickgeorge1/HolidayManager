@@ -1,0 +1,21 @@
+<!-- begin:: Page -->
+{% include 'partials/_header-base-mobile.html.twig' %}
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        {% include 'partials/_aside-base.html.twig' %}
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            {% include 'partials/_header-base.html.twig' %}
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+                {% include 'partials/_subheader-subheader-v3.html.twig' %}
+                {% include 'partials/_content-base.html.twig' %}
+            </div>
+            {% include 'partials/_footer-base.html.twig' %}
+        </div>
+    </div>
+</div>
+<!-- end:: Page -->
+{% include 'partials/_layout-quick-panel.html.twig' %}
+{% include 'partials/_layout-scrolltop.html.twig' %}
+{% include 'partials/_layout-toolbar.html.twig' %}
+{% include 'partials/_layout-demo-panel.html.twig' %}
+{% include 'partials/_layout-chat.html.twig' %}
