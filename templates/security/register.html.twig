@@ -1,0 +1,15 @@
+{% extends "security/sample.html.twig" %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+
+    {{ form_start(registrationForm) }}
+    {% for children in registrationForm.children %}
+        {{ form_row(children, {'attr': {'class': 'form-control'}}) }}
+{#        {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}#}
+{% endfor %}
+        <button class="btn btn-lg btn-primary">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

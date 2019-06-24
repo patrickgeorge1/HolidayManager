@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <form method="post" action="/mail">
+
+
+
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Mesaj de trimis</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message"></textarea>
+        </div>
+    </form>
+    <button type="submit" class="btn btn-primary">Trimite</button>
+{% endblock %}
