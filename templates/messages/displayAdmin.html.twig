@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessagesController!{% endblock %}
+
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="container">
+
+            {% set i = 1 %}
+            {% for now in mesaj %}
+            {% if i%2 == 1 %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__body">
+                            <div class="kt-infobox">
+                                <div class="kt-infobox__header">
+                                    <h2 class="kt-infobox__title">{{ now.title }}</h2>
+                                    <a href="/admin/messages/delete/{{ now.id }}"><button type="button" class="btn btn-outline-danger float-right">Delete</button></a>
+                                    <a href="/admin/messages/update/{{ now.id }}"><button type="button" class="btn btn-outline-brand float-right"><i class="fa fa-code"></i> Edit</button></a>
+                                </div>
+
+                                <div class="kt-infobox__body">
+                                    <div class="kt-infobox__section">
+                                        <div class="kt-infobox__content">
+                                            {{ now.body }} <br/>
+                                            <br/>
+                                            <a href="#" class="kt-link">posted by {{ now.admin }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-lg-6">
+                    <div class="kt-portlet">
+                        <div class="kt-portlet__body">
+                            <div class="kt-infobox">
+                                <div class="kt-infobox__header">
+                                    <h2 class="kt-infobox__title">{{ now.title }}</h2>
+                                    <a href="/admin/messages/delete/{{ now.id }}"><button type="button" class="btn btn-outline-danger float-right">Delete</button></a>
+                                    <a href="/admin/messsages/update/{{ now.id }}"><button type="button" class="btn btn-outline-brand float-right"><i class="fa fa-code"></i> Edit</button></a>
+                                </div>
+                                <div class="kt-infobox__body">
+                                    <div class="kt-infobox__section">
+                                        <div class="kt-infobox__content">
+                                            {{ now.body }} <br/>
+                                            <br/>
+                                            <a href="#" class="kt-link">posted by {{ now.admin }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% set i = i + 1 %}
+            {% endfor %}
+
+
+    {% if mesaj|length % 2 == 1 %}
+        &nbsp;</div>
+    {% endif %}
+
+    <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+<a href="/admin/addMessage">
+    <br>&nbsp;<button type="button" class="btn btn-success btn-elevate btn-pill">Add message</button>&nbsp;
+</a>
+</div>
+{% endblock %}

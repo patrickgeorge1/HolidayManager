@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,6 +51,16 @@ class  User implements UserInterface
      * @ORM\Column(type="string", length=13)
      */
     private $phone;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Messages", mappedBy="admin", orphanRemoval=true)
+     */
+    private $messages;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,9 +179,44 @@ class  User implements UserInterface
         array_push($this->roles, $role);
     }
 
+    public function getRole() {
+        return $this->roles;
+    }
+
     public function deleteRole($role) {
         for($i = 0; $i < count($this->roles); $i++)
             if ($this->roles[$i] == $role)
                 unset($this->roles[$i]);
+    }
+
+    /**
+     * @return Collection|Messages[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Messages $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Messages $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getAdmin() === $this) {
+                $message->setAdmin(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -21,7 +21,7 @@ class MainController extends AbstractController
         // verifica rol
         /*
         if ($this->isGranted("ROLE_ADMIN"))
-            return $this->render('main/index.html.twig', [
+            return $this->render('main/display.html.twig', [
                 'controller_name' => 'MainController',
             ]);
         else
@@ -38,11 +38,11 @@ class MainController extends AbstractController
      * @Route("/mail", name="mail", methods={"GET", "POST"})
      */
     public function mail(\Swift_Mailer $mailer, Request $request) {
-        $text = $request->get("mesaj");
+        $text = $request->get("message");
 
-        $message = (new \Swift_Message($request->get("title")))
+        $message = (new \Swift_Message("Mesaj"))
             ->setFrom('msend28@gmail.com')
-            ->setTo($request->get("recipient"))
+            ->setTo("patrionpatrick@gmail.com")
             ->setBody(
                 $text,
                 'text/plain'
