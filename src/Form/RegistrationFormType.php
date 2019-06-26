@@ -34,7 +34,7 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 3,
                         'minMessage' => 'Your name is too short',
-                    ])
+                    ]),
                 ]])
             ->add('phone', TelType::class, [
                 'constraints' => [

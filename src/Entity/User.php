@@ -60,6 +60,9 @@ class  User implements UserInterface
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
     }
 
     public function getId(): ?int
@@ -89,24 +92,6 @@ class  User implements UserInterface
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     /**
      * @see UserInterface
@@ -175,12 +160,16 @@ class  User implements UserInterface
 
         return $this;
     }
-    public function addRole($role) {
+    public function setRoles($role) {
         array_push($this->roles, $role);
     }
 
-    public function getRole() {
-        return $this->roles;
+    /**
+     * @see UserInterface
+     */
+    public function getRoles() {
+        $roles = $this->roles;
+        return array_unique($roles);
     }
 
     public function deleteRole($role) {

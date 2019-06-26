@@ -28,7 +28,7 @@ class MessagesController extends AbstractController
     public function messages()
     {
         // daca un admin incearca sa intre pe user
-        $rol = $this->getUser()->getRole();
+        $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("messages_admin");
 
         // randez twig de user
