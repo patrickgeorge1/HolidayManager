@@ -41,7 +41,7 @@ class MessagesController extends AbstractController
             $now["body"]  = $individual->getBody();
             array_push($param, $now);
         }
-        $mesaj = array("mesaj" => $param);
+        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName());
 
 
 
@@ -56,7 +56,7 @@ class MessagesController extends AbstractController
     {
 
         // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRole();
+        $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
         // randez twig de admin
@@ -70,7 +70,7 @@ class MessagesController extends AbstractController
             $now["body"]  = $individual->getBody();
             array_push($param, $now);
         }
-        $mesaj = array("mesaj" => $param);
+        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName());
 
 
 
@@ -84,7 +84,7 @@ class MessagesController extends AbstractController
     public function addMessage()
     {
 
-        return $this->render('messages/createMessage.html.twig');
+        return $this->render('messages/createMessage.html.twig', array("user_display" => $this->getUser()->getFirstName()));
     }
 
 
@@ -94,7 +94,7 @@ class MessagesController extends AbstractController
     public function postMessage(\Symfony\Component\HttpFoundation\Request $request)
     {
         // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRole();
+        $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
         $title = $request->get("title");
@@ -124,7 +124,7 @@ class MessagesController extends AbstractController
     {
         $now = $messagesRepository->findOneBy(["id" => $id]);
 
-        return $this->render('messages/updateMessage.html.twig', array("id" => $id, "title" => $now->getTitle(), "body" => $now->getBody()));
+        return $this->render('messages/updateMessage.html.twig', array("id" => $id, "title" => $now->getTitle(), "body" => $now->getBody(), "user_display" => $this->getUser()->getFirstName()));
     }
 
     /**

@@ -70,13 +70,13 @@
                 <strong> <span class="text-right"> Add user </span> </strong>
             </div>
 
-                {{ form_start(registrationForm, {'attr' : { 'class' : 'portlet-body form custom-form' }}) }}
+                {{ form_start(registrationForm, {'attr' : { 'class' : 'portlet-body form custom-form'}}) }}
 
-                {{ form_row(registrationForm.email, {'label' : ' ' ,'value' : 'email', 'attr' : { 'class' : 'form-control' }}) }}
-                {{ form_row(registrationForm.firstName, {'label' : ' ' ,'value' : 'First Name', 'attr' : { 'class' : 'form-control'}}) }}
-                {{ form_row(registrationForm.lastName, {'label' : ' ' ,'value' : 'Last Name', 'attr' : { 'class' : 'form-control' }}) }}
-                {{ form_row(registrationForm.phone, {'label' : ' ' ,'value' : 'Phone', 'attr' : { 'class' : 'form-control' }}) }}
-                {{ form_row(registrationForm.plainPassword, {'label' : ' ' ,'value' : 'Password', 'attr' : { 'class' : 'form-control' }}) }}
+                {{ form_row(registrationForm.email, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'email' }}) }}
+                {{ form_row(registrationForm.firstName, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'First Name'}}) }}
+                {{ form_row(registrationForm.lastName, {'label' : ' ' ,'placeholder' : 'Last Name', 'attr' : { 'class' : 'form-control' }}) }}
+                {{ form_row(registrationForm.phone, {'label' : ' ' ,'placeholder' : 'Phone', 'attr' : { 'class' : 'form-control' }}) }}
+                {{ form_row(registrationForm.plainPassword, {'label' : ' ' ,'placeholder' : 'Password', 'attr' : { 'class' : 'form-control' }}) }}
                 <div class="btn-section">
                     <button type="submit" class="btn btn-primary"> Add </button>
                 </div>
