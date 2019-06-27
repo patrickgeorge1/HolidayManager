@@ -118,7 +118,7 @@ class MessagesController extends AbstractController
 
 
     /**
-     * @Route("/admin/messages/update/{id}", name="messages_admin_update", methods={"GET"})
+     * @Route("/admin/messages/update/{id}", name="messages_admin_update", methods={"GET", "POST"})
      */
     public function updateMessage($id, MessagesRepository $messagesRepository)
     {
@@ -128,11 +128,11 @@ class MessagesController extends AbstractController
     }
 
     /**
-     * @Route("/admin/messages/update/{id}/post", name="messages_admin_update_post", methods={"POST"})
+     * @Route("/admin/messages/update/{id}/post", name="messages_admin_update_post", methods={"POST", "GET"})
      */
     public function updatePost (Request $request, MessagesRepository $messagesRepository, $id) {
         // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRole();
+        $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
         // update la mesaj
@@ -151,5 +151,15 @@ class MessagesController extends AbstractController
     }
 
 
+    /**
+     * @Route("/admin/messages/delete/{id}", name="messages_admin_delete", methods={"GET", "POST"})
+     */
+    public function deleteMessage($id, MessagesRepository $messagesRepository)
+    {
+        $now = $messagesRepository->findOneBy(["id" => $id]);
+        $this -> entityManager -> remove($now);
+        $this -> entityManager -> flush();
+        return $this->redirectToRoute("messages_admin");
+    }
 
 }
