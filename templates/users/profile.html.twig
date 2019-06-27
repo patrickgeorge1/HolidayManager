@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessagesController!{% endblock %}
+
+{% block body %}
+
+        <h1>{{ person.id }}</h1><br/>
+        <h1>{{ person.email }}</h1><br/>
+        <h1>{{ person.firstName }}</h1><br/>
+        <h1>{{ person.lastName }}</h1><br/>
+        <h1>{{ person.phone }}</h1><br/>
+        <h1>{{ person.roles[0] }}</h1><br/>
+        <br/><br/><br/>
+        <h1>Beneficii :</h1> <br/><br/><br/>
+
+                {% if person.benefits is defined %}
+                        {% for benefit in person.benefits %}
+                                <h1> {{ benefit.name }}  </h1> <br/>
+                        {% endfor %}
+
+                {% else %}
+
+                        <h1>     Nu ai nici un beneficiu </h1> <br/>
+
+                {% endif %}
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

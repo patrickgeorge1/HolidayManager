@@ -41,7 +41,7 @@ class MessagesController extends AbstractController
             $now["body"]  = $individual->getBody();
             array_push($param, $now);
         }
-        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName());
+        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId());
 
 
 
@@ -70,7 +70,7 @@ class MessagesController extends AbstractController
             $now["body"]  = $individual->getBody();
             array_push($param, $now);
         }
-        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName());
+        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(),'profile' => $this->getUser()->getId());
 
 
 
@@ -84,7 +84,7 @@ class MessagesController extends AbstractController
     public function addMessage()
     {
 
-        return $this->render('messages/createMessage.html.twig', array("user_display" => $this->getUser()->getFirstName()));
+        return $this->render('messages/createMessage.html.twig', array("user_display" => $this->getUser()->getFirstName(),'profile' => $this->getUser()->getId()));
     }
 
 
@@ -124,7 +124,7 @@ class MessagesController extends AbstractController
     {
         $now = $messagesRepository->findOneBy(["id" => $id]);
 
-        return $this->render('messages/updateMessage.html.twig', array("id" => $id, "title" => $now->getTitle(), "body" => $now->getBody(), "user_display" => $this->getUser()->getFirstName()));
+        return $this->render('messages/updateMessage.html.twig', array("id" => $id, "title" => $now->getTitle(), "body" => $now->getBody(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId()));
     }
 
     /**

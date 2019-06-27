@@ -57,12 +57,29 @@ class  User implements UserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Benefits", mappedBy="users")
+     */
+    private $benefits;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $freeDays;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Demands", mappedBy="employee")
+     */
+    private $demands;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
 
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        $this->benefits = new ArrayCollection();
+        $this->demands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +220,77 @@ class  User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($message->getAdmin() === $this) {
                 $message->setAdmin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Benefits[]
+     */
+    public function getBenefits(): Collection
+    {
+        return $this->benefits;
+    }
+
+    public function addBenefit(Benefits $benefit): self
+    {
+        if (!$this->benefits->contains($benefit)) {
+            $this->benefits[] = $benefit;
+            $benefit->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBenefit(Benefits $benefit): self
+    {
+        if ($this->benefits->contains($benefit)) {
+            $this->benefits->removeElement($benefit);
+            $benefit->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getFreeDays(): ?int
+    {
+        return $this->freeDays;
+    }
+
+    public function setFreeDays(int $freeDays): self
+    {
+        $this->freeDays = $freeDays;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demands[]
+     */
+    public function getDemands(): Collection
+    {
+        return $this->demands;
+    }
+
+    public function addDemand(Demands $demand): self
+    {
+        if (!$this->demands->contains($demand)) {
+            $this->demands[] = $demand;
+            $demand->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemand(Demands $demand): self
+    {
+        if ($this->demands->contains($demand)) {
+            $this->demands->removeElement($demand);
+            // set the owning side to null (unless already changed)
+            if ($demand->getEmployee() === $this) {
+                $demand->setEmployee(null);
             }
         }
 

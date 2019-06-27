@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MessagesController!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+
+
+    <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+
+
+
+    <div class="row">
+        &nbsp;&nbsp;&nbsp;
+        <div class="col-5 kt-bg-light">
+            <!--begin::New Users-->
+            <div class="kt-widget24">
+                <div class="kt-widget24__details">
+                    <div class="kt-widget24__info">
+                        <h4 class="kt-widget24__title">
+                            Total days
+                        </h4>
+                        <span class="kt-widget24__desc">
+					            All available days for vacation
+					        </span>
+                    </div>
+
+                    <span class="kt-widget24__stats kt-font-success">
+					        {{ person.freeDays }}/21
+					    </span>
+                </div>
+
+                <div class="progress progress--sm">
+                    <div class="progress-bar kt-bg-success" role="progressbar" style="width: {{ (100*person.freeDays/21)|round }}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div class="kt-widget24__action">
+						<span class="kt-widget24__change">
+							remaining
+						</span>
+                    <span class="kt-widget24__number">
+							{{ (100*person.freeDays/21)|round }}%
+					    </span>
+                </div>
+            </div>
+            <!--end::New Users-->
+        </div>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div class="col-6 kt-bg-light">
+            <!--begin::New Users-->
+            <div class="kt-widget24">
+                <div class="kt-widget24__details">
+                    <div class="kt-widget24__info">
+                        <h4 class="kt-widget24__title">
+                            Pending Status
+                        </h4>
+                        <span class="kt-widget24__desc">
+                                Unseen requests
+					        </span>
+                    </div>
+
+                    <span class="kt-widget24__stats kt-font-success">
+                        {% set i = 0 %}
+                        {% for demand in person.demands %}
+                            {% if demand.status == 0 %}
+                                {% set i = i + 1 %}
+                            {% endif %}
+                        {% endfor %}
+					        {{ i }}/{{ person.demands|length }}
+					    </span>
+                </div>
+
+                <div class="progress progress--sm">
+                    <div class="progress-bar kt-bg-success" role="progressbar" style="width: {{ 100 * i / (person.demands|length) }}%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <div class="kt-widget24__action">
+						<span class="kt-widget24__change">
+							unseen
+						</span>
+                    <span class="kt-widget24__number">
+							{{ 100 * i / (person.demands|length) }}%
+					    </span>
+                </div>
+            </div>
+            <!--end::New Users-->
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+
+        <div class="col-md-4 ml-auto">
+            <button type="button" class="btn btn-brand btn-elevate btn-pill btn-elevate-air">Request holiday</button>
+        </div>
+
+    </div>
+    <br/><br/>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="kt-portlet ">
+                    <div class="kt-portlet__head alert-success">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                List of available benefits for you, {{ user_display }} [{{ benefits|length }}]
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+                            {% if benefits|length %}
+                                {% for benefit in benefits %}
+                                        <div class="card">
+                                            <div class="card-header" id="headingOne{{ benefit.id }}">
+                                                <div class="card-title" data-toggle="collapse" data-target="#collapseOne{{ benefit.id }}" aria-expanded="false" aria-controls="collapseOne{{ benefit.id }}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <polygon id="Shape" points="0 0 24 0 24 24 0 24"/>
+                                                            <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" id="Path-94" fill="#000000" fill-rule="nonzero"/>
+                                                            <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" id="Path-94" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "/>
+                                                        </g>
+                                                    </svg> {{ benefit.name }}
+                                                </div>
+                                            </div>
+                                            <div id="collapseOne{{ benefit.id }}" class="collapse" aria-labelledby="headingOne{{ benefit.id }}" data-parent="#accordionExample{{ benefit.id }}">
+                                                <div class="card-body">
+                                                   {{ benefit.description }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="kt-space-10 bg-success"></div>
+
+                                {% endfor %}
+                            {% else %}
+                                <h5 style="font-size: 15px; font-family: 'Comic Sans MS'">&nbsp;&nbsp; Sorry, you have zero benefits yet !</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div> <!-- end row-->
+{% endblock %}
