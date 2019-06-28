@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Messages;
 use App\Form\AddMessageType;
+use App\Form\EditMessageType;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -108,44 +109,29 @@ class MessagesController extends AbstractController
     }
 
 
-//    /**
-//     * @Route("/admin/addMessage/post", name="messages_admin_post", methods={"POST"})
-//     */
-//    public function postMessage(\Symfony\Component\HttpFoundation\Request $request)
-//    {
-//        // daca incearca un user sa intre pe admin
-//        $rol = $this->getUser()->getRoles();
-//        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
-//
-//
-//        $title = $request->get("title");
-//        $message = $request->get("message");
-//        try {
-//            $now = new Messages();
-//            $now->setTitle($title);
-//            $now->setBody($message);
-//            $now->setAdmin($this->getUser());
-//            $this->entityManager->persist($now);
-//            $this->entityManager->flush();
-//        } catch (Exception $e) {
-//            return $this->redirectToRoute("messages_admin", array("error" => $e->getMessage()));
-//        }
-//
-//
-//        return $this->redirectToRoute("messages_admin");
-//    }
-//
-//
-
-
     /**
      * @Route("/admin/messages/update/{id}", name="messages_admin_update", methods={"GET", "POST"})
      */
-    public function updateMessage($id, MessagesRepository $messagesRepository)
+    public function updateMessage(Messages $message, MessagesRepository $messagesRepository, Request $request)
     {
-        $now = $messagesRepository->findOneBy(["id" => $id]);
 
-        return $this->render('messages/updateMessage.html.twig', array("id" => $id, "title" => $now->getTitle(), "body" => $now->getBody(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
+        // iau prin {id} obj de tip message si l dau in create form ca param ca sa interpreteze ca edit form
+        $form = $this->createForm(EditMessageType::class,$message);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var $message Messages */
+            $message->setAdmin($this->getUser());
+            // nu mai e nevoie de persist
+            $this -> entityManager->flush();
+            return $this -> redirectToRoute("messages_admin");
+        }
+        return $this->render('messages/updateMessage.html.twig', [
+            'editForm' => $form->createView(),
+            "user_display" => $this->getUser()->getFirstName(),
+            'profile' => $this->getUser()->getId(),
+            'person' => $this->getUser(),
+            'message' => $message
+        ]);
     }
 
     /**
