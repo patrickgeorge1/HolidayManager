@@ -4,32 +4,29 @@
 namespace App\Form;
 
 
-use App\Entity\User;
+use App\Entity\Messages;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditUserType extends AbstractType
+class AddMessageType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("email")
-            ->add("password", PasswordType::class)
-            ->add("first_name")
-            ->add("last_name")
-            ->add("phone")
+            ->add("title")
+            ->add("body")
         ;
 
     }
 
-    // set options for form behaviour
     public function configureOptions(OptionsResolver $resolver)
     {
         // Users este entitatea bazei de date pe care vrea sa o mapeze
         $resolver->setDefaults([
-            'data_class' => User::class
+            'data_class' => Messages::class
         ]);
     }
+
 }

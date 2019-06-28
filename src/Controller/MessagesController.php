@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Messages;
+use App\Form\AddMessageType;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -81,40 +82,60 @@ class MessagesController extends AbstractController
     /**
      * @Route("/admin/addMessage", name="messages_admin_add")
      */
-    public function addMessage()
-    {
-
-        return $this->render('messages/createMessage.html.twig', array("user_display" => $this->getUser()->getFirstName(),'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
-    }
-
-
-    /**
-     * @Route("/admin/addMessage/post", name="messages_admin_post", methods={"POST"})
-     */
-    public function postMessage(\Symfony\Component\HttpFoundation\Request $request)
+    public function addMessage(Request $request)
     {
         // daca incearca un user sa intre pe admin
         $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+        $form = $this->createForm(AddMessageType::class);
+        $form->handleRequest($request);
 
-        $title = $request->get("title");
-        $message = $request->get("message");
-        try {
-            $now = new Messages();
-            $now->setTitle($title);
-            $now->setBody($message);
-            $now->setAdmin($this->getUser());
-            $this->entityManager->persist($now);
-            $this->entityManager->flush();
-        } catch (Exception $e) {
-            return $this->redirectToRoute("messages_admin", array("error" => $e->getMessage()));
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var $message Messages */
+            $message = $form->getData();
+            $message->setAdmin($this->getUser());
+            $this -> entityManager->persist($message);
+            $this -> entityManager->flush();
+            return $this ->redirectToRoute("messages_admin");
         }
-
-
-        return $this->redirectToRoute("messages_admin");
+        return $this->render('messages/createMessage.html.twig', [
+            'addMessage' => $form->createView(),
+            'user_display' => $this->getUser()->getFirstName(),
+            'profile' => $this->getUser()->getId(),
+            'person' => $this->getUser()
+        ]);
     }
 
 
+//    /**
+//     * @Route("/admin/addMessage/post", name="messages_admin_post", methods={"POST"})
+//     */
+//    public function postMessage(\Symfony\Component\HttpFoundation\Request $request)
+//    {
+//        // daca incearca un user sa intre pe admin
+//        $rol = $this->getUser()->getRoles();
+//        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+//
+//
+//        $title = $request->get("title");
+//        $message = $request->get("message");
+//        try {
+//            $now = new Messages();
+//            $now->setTitle($title);
+//            $now->setBody($message);
+//            $now->setAdmin($this->getUser());
+//            $this->entityManager->persist($now);
+//            $this->entityManager->flush();
+//        } catch (Exception $e) {
+//            return $this->redirectToRoute("messages_admin", array("error" => $e->getMessage()));
+//        }
+//
+//
+//        return $this->redirectToRoute("messages_admin");
+//    }
+//
+//
 
 
     /**

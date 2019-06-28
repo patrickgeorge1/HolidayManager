@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md-9">
             <!-- BEGIN SAMPLE TABLE PORTLET-->
-            <div class="portlet">
-                <div class="portlet-title">
+            <div class="kt-portlet kt-portlet--tab">
+                <div class="kt-portlet-title">
 
                     <div class="tools">
                         <a href="javascript:;" class="collapse"> </a>
@@ -16,7 +16,7 @@
                         <a href="javascript:;" class="remove"> </a>
                     </div>
                 </div>
-                <div class="portlet-body">
+                <div class="kt-portlet__body">
                     <div class="table-scrollable">
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <thead>
@@ -64,26 +64,43 @@
             </div>
             <!-- END SAMPLE TABLE PORTLET-->
         </div>
-        <div class="col-md-3 fixed-right">
 
-            <div class="alert alert-success text-center" role="alert">
-                <strong> <span class="text-right"> Add user </span> </strong>
-            </div>
 
-                {{ form_start(registrationForm, {'attr' : { 'class' : 'portlet-body form custom-form'}}) }}
 
-                {{ form_row(registrationForm.email, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'email' }}) }}
-                {{ form_row(registrationForm.firstName, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'First Name'}}) }}
-                {{ form_row(registrationForm.lastName, {'label' : ' ' ,'placeholder' : 'Last Name', 'attr' : { 'class' : 'form-control' }}) }}
-                {{ form_row(registrationForm.phone, {'label' : ' ' ,'placeholder' : 'Phone', 'attr' : { 'class' : 'form-control' }}) }}
-                {{ form_row(registrationForm.plainPassword, {'label' : ' ' ,'placeholder' : 'Password', 'attr' : { 'class' : 'form-control' }}) }}
-                <div class="btn-section">
-                    <button type="submit" class="btn btn-primary"> Add </button>
+
+
+        <div class="col-md-3 kt-grid--center">
+            <div class="kt-portlet kt-portlet--tab ">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon kt-hide">
+						<i class="la la-gear"></i>
+					</span>
+                        <h3 class="kt-portlet__head-title">
+                            Add user
+                        </h3>
+                    </div>
                 </div>
-
-                {{ form_end(registrationForm) }}
+                <div class="kt-portlet__body">
+                    {{ form_start(registrationForm, {'attr' : { 'class' : 'portlet-body form custom-form'}}) }}
+                    {{ form_row(registrationForm.email, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'email' }}) }}
+                    {{ form_row(registrationForm.firstName, {'label' : ' ' , 'attr' : { 'class' : 'form-control','placeholder' : 'First Name'}}) }}
+                    {{ form_row(registrationForm.lastName, {'label' : ' ', 'attr' : { 'class' : 'form-control', 'placeholder' : 'Last Name' }}) }}
+                    {{ form_row(registrationForm.phone, {'label' : ' ' ,'placeholder' : 'Phone', 'attr' : { 'class' : 'form-control', 'placeholder' : 'Phone' }}) }}
+                    {{ form_row(registrationForm.plainPassword, {'label' : ' ', 'attr' : { 'class' : 'form-control', 'placeholder' : 'Enter a password' }}) }}
+                    <div class="btn-section">
+                        <button type="submit" class="btn btn-primary"> Add </button>
+                    </div>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
 
 
 

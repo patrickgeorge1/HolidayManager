@@ -4,14 +4,45 @@
 
 {% block body %}
 
-    {{ form_start(editForm) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
 
-    {{ form_widget(editForm) }}
+            </div>
+            <div class="col-md-5 kt-grid--center">
+                <div class="kt-portlet kt-portlet--tab ">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon kt-hide">
+						<i class="la la-gear"></i>
+					</span>
+                            <h3 class="kt-portlet__head-title">
+                                Edit user : &nbsp; &nbsp; {{ user_display }}
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        {{ form_start(editForm, {'attr' : { 'class' : 'portlet-body form custom-form'}}) }}
 
-    <button type="submit" class="btn btn-primary"> Edit </button>
+                            {{ form_row(editForm.email, {'attr' : { 'class' : 'form-control'}}) }}
+                            <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                            {{ form_row(editForm.password, {'attr' : { 'class' : 'form-control', 'placeholder' : 'change password', 'value' : person.password}}) }}
+                            <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                            {{ form_row(editForm.first_name, {'attr' : { 'class' : 'form-control'}}) }}
+                            <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                            {{ form_row(editForm.last_name, {'attr' : { 'class' : 'form-control'}}) }}
+                            <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                            {{ form_row(editForm.phone, {'attr' : { 'class' : 'form-control'}}) }}
+                            <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                            <button type="submit" class="btn btn-primary"> Edit </button>
+                        {{ form_end(editForm) }}
+                    </div>
 
-    {{ form_end(editForm) }}
 
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

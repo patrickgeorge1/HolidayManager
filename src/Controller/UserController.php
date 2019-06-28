@@ -222,6 +222,7 @@ class UserController extends AbstractController
         $param = array("users" => $stationary, "registrationForm" => $form->createView(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
 
 
+        //return $this->render("users/listAdmin.html.twig", $param);
         return $this->render("users/listAdmin.html.twig", $param);
     }
 

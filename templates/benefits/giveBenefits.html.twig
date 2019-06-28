@@ -10,14 +10,48 @@
 
 
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
 
-    {{ form_start(giveBenefitForm) }}
+            </div>
+            <div class="col-md-5 kt-grid--center">
+                <div class="kt-portlet kt-portlet--tab ">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+					<span class="kt-portlet__head-icon kt-hide">
+						<i class="la la-gear"></i>
+					</span>
+                            <h3 class="kt-portlet__head-title">
+                                Add a benefit
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        {{ form_start(giveBenefitForm, {'attr' : { 'class' : 'portlet-body form custom-form'}}) }}
 
-    {{ form_widget(giveBenefitForm) }}
+                        {{ form_row(giveBenefitForm.name, {'attr' : { 'class' : 'form-control'}}) }}
+                        <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                        {{ form_row(giveBenefitForm.users, {'attr' : { 'class' : 'form-control', 'placeholder' : 'change password', 'value' : person.password}}) }}
+                        <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                        <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                        <button type="submit" class="btn btn-primary"> Give it </button>
+                        {{ form_end(giveBenefitForm) }}
+                    </div>
 
-    <button type="submit" class="btn btn-primary"> Create</button>
 
-    {{ form_end(giveBenefitForm) }}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
 
 
 {% endblock %}

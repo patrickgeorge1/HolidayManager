@@ -32,6 +32,7 @@ class Messages
      */
     private $admin;
 
+
     public function getId(): ?int
     {
         return $this->id;

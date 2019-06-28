@@ -78,6 +78,7 @@ class  User implements UserInterface
 
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+        $this -> freeDays = 21;
         $this->benefits = new ArrayCollection();
         $this->demands = new ArrayCollection();
     }
