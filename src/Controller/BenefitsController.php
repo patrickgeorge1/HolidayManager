@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Benefits;
 use App\Form\AddBenefitType;
+use App\Form\GiveBenefitType;
 use App\Repository\BenefitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BenefitsController extends AbstractController
@@ -54,7 +57,8 @@ class BenefitsController extends AbstractController
             'benefits' => $benefits,
             'user_display' => $this->getUser()->getFirstName(),
             'profile' => $this->getUser()->getId(),
-            'addBenefit' => $form->createView()
+            'addBenefit' => $form->createView(),
+            'person' => $this->getUser()
         ]);
     }
 
@@ -76,5 +80,48 @@ class BenefitsController extends AbstractController
             'profile' => $this->getUser()->getId(),
             'person' => $this->getUser()
         ]);
+    }
+
+
+    /**
+     * @Route("/admin/benefits/give", name="benefits_admin_give")
+     */
+    public function giveBenefits(Request $request)
+    {
+
+        // daca e admin il trimit pe ruta lui
+        $rol = $this->getUser()->getRoles();
+        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("benefits_user_list");
+
+
+        $form = $this->createForm(GiveBenefitType::class);
+
+        $form->handleRequest($request);
+        $benefits = $this -> getUser() -> getBenefits();
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            // info va un array de obj {benefits, user}
+            $info = $form->getData();
+            $benefit = $info["name"];
+            $user = $info["users"];
+            $benefit->addUser($user);
+
+
+            $this -> entityManager->persist($benefit);
+            $this -> entityManager->flush();
+            return $this -> redirectToRoute("benefits_admin_give");
+        }
+        return $this->render('benefits/giveBenefits.html.twig', [
+            'giveBenefitForm' => $form->createView(),
+            'benefits' => $benefits,
+            'user_display' => $this->getUser()->getFirstName(),
+            'profile' => $this->getUser()->getId(),
+            'person' => $this->getUser()
+        ]);
+
+
+
+
     }
 }

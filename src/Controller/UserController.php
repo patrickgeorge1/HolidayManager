@@ -48,7 +48,8 @@ class UserController extends AbstractController
 
         return $this->render('main/index.html.twig', [
             "user_display" => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId()
+            'profile' => $this->getUser()->getId(),
+            'person' => $this->getUser()
         ]);
     }
 
@@ -85,7 +86,7 @@ class UserController extends AbstractController
      */
     public function messages()
     {
-        return $this->render("main/messages.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId()));
+        return $this->render("main/messages.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
     }
 
 
@@ -110,9 +111,9 @@ class UserController extends AbstractController
                 $now["phone"] = $user->getPhone();
                 array_push($stationary, $now);
             }
-            $param = array("users" => $stationary, "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId());
+            $param = array("users" => $stationary, "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
         } catch (\Exception $e) {
-            return $this->redirectToRoute("slash", array("error" => $e->getMessage(), "user_display" => $this->getUser()->getFirstName()));
+            return $this->redirectToRoute("slash", array("error" => $e->getMessage(), "user_display" => $this->getUser()->getFirstName(), 'person' => $this->getUser()));
         }
         return $this->render("users/list.html.twig", $param);
     }
@@ -175,7 +176,8 @@ class UserController extends AbstractController
         return $this->render('users/edit.html.twig', [
             'editForm' => $form->createView(),
             "user_display" => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId()
+            'profile' => $this->getUser()->getId(),
+            'person' => $this->getUser()
         ]);
     }
 
@@ -217,7 +219,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute("admin_list");
         }
 
-        $param = array("users" => $stationary, "registrationForm" => $form->createView(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId());
+        $param = array("users" => $stationary, "registrationForm" => $form->createView(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
 
 
         return $this->render("users/listAdmin.html.twig", $param);
