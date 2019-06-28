@@ -227,7 +227,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(" /profile/user/28", name="profile_user", methods={"GET", "POST"})
+     * @Route(" /profile/user", name="profile_user", methods={"GET", "POST"})
      */
     public function profile()
     {

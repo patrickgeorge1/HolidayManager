@@ -4,33 +4,141 @@
 
 {% block body %}
 
-        <h1>{{ person.id }}</h1><br/>
-        <h1>{{ person.email }}</h1><br/>
-        <h1>{{ person.firstName }}</h1><br/>
-        <h1>{{ person.lastName }}</h1><br/>
-        <h1>{{ person.phone }}</h1><br/>
-        <h1>{{ person.roles[0] }}</h1><br/>
-        <br/><br/><br/>
-        <h1>Beneficii :</h1> <br/><br/><br/>
-
-                {% if person.benefits is defined %}
-                        {% for benefit in person.benefits %}
-                                <h1> {{ benefit.name }}  </h1> <br/>
-                        {% endfor %}
-
-                {% else %}
-
-                        <h1>     Nu ai nici un beneficiu </h1> <br/>
-
-                {% endif %}
 
 
 
+        <div class="container">
+                <div class="row">
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                                <div class="kt-portlet__body">
+                                        <div class="kt-widget kt-widget--user-profile-3">
+                                                <div class="kt-widget__top">
+                                                        <div class="kt-widget__media kt-hidden-">
+                                                                <img src="/images/avatar.jpg" alt="image">
+                                                        </div>
+                                                        <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
+                                                                JM
+                                                        </div>
+                                                        <div class="kt-widget__content">
+                                                                <div class="kt-widget__head">
+                                                                        <a href="#" class="kt-widget__username">
+                                                                                {{ person.firstName }} {{ person.lastName }}
+                                                                                {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                                        <i class="flaticon2-correct"></i>
+                                                                                {% else %}
+                                                                                        <i class="flaticon-avatar"></i>
+                                                                                {% endif %}
+                                                                        </a>
 
+                                                                        <div class="kt-widget__action">
 
+                                                                        </div>
+                                                                </div>
 
+                                                                <div class="kt-widget__subhead">
+                                                                        <a href="#"><i class="flaticon2-new-email"></i>{{ person.email }}</a>
+                                                                        <a href="#"><i class="flaticon2-calendar-3"></i>{{ person.phone }} </a>
+                                                                        <a href="#"><i class="flaticon2-placeholder"></i>
+                                                                                {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                                        administrator
+                                                                                {% else %}
+                                                                                        user
+                                                                                {% endif %}
+                                                                        </a>
+                                                                </div>
 
+                                                                <div class="kt-widget__info">
+                                                                        <div class="kt-widget__desc">
+                                                                                {% if person.benefits is defined %}
+                                                                                        <p> Benfits :  &nbsp;
+                                                                                        {% set ok = 1 %}
+                                                                                        {% for benefit in person.benefits %}
+                                                                                                {{ benefit.name }},
+                                                                                                {% if loop.index > 5 and ok == 1 %}
+                                                                                                        </p> <br/> <p>
+                                                                                                        {% set ok = 0 %}
+                                                                                                {% endif %}
 
+                                                                                        {% endfor %}
+                                                                                        </p>
+
+                                                                                {% else %}
+                                                                                        <p> no benefits yet </p>
+                                                                                {% endif %}
+                                                                        </div>
+                                                                        <div class="kt-widget__progress">
+                                                                                <div class="kt-widget__text">
+                                                                                        Free
+                                                                                </div>
+                                                                                <div class="progress" style="height: 5px;width: 100%;">
+                                                                                        <div class="progress-bar kt-bg-success" role="progressbar" style="width: {{ (person.freeDays * 100 / 21)|round }}%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                </div>
+                                                                                <div class="kt-widget__stats">
+                                                                                        {{ (person.freeDays * 100 / 21)|round }}%
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div class="kt-widget__bottom">
+                                                        <div class="kt-widget__item">
+                                                                <div class="kt-widget__icon">
+                                                                        <i class="flaticon-piggy-bank"></i>
+                                                                </div>
+                                                                <div class="kt-widget__details">
+                                                                        <span class="kt-widget__title">Free days</span>
+                                                                        <span class="kt-widget__value"><span></span>{{ person.freeDays }}</span>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="kt-widget__item">
+                                                                <div class="kt-widget__icon">
+                                                                        <i class="flaticon-confetti"></i>
+                                                                </div>
+                                                                <div class="kt-widget__details">
+                                                                        <span class="kt-widget__title">Benefits</span>
+                                                                        <span class="kt-widget__value"><span></span>{{ person.benefits|length }}</span>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="kt-widget__item">
+                                                                <div class="kt-widget__icon">
+                                                                        <i class="flaticon-pie-chart"></i>
+                                                                </div>
+                                                                <div class="kt-widget__details">
+                                                                        <span class="kt-widget__title">Id</span>
+                                                                        <span class="kt-widget__value"><span></span>{{ person.id }}</span>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="kt-widget__item">
+                                                                <div class="kt-widget__icon">
+                                                                        <i class="flaticon-file-2"></i>
+                                                                </div>
+                                                                <div class="kt-widget__details">
+                                                                        <span class="kt-widget__title">demands</span>
+                                                                        <a href="#" class="kt-widget__value kt-font-brand">{{ person.demands|length }}</a>
+                                                                </div>
+                                                        </div>
+
+                                                        {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                <div class="kt-widget__item">
+                                                                        <div class="kt-widget__icon">
+                                                                                <i class="flaticon-chat-1"></i>
+                                                                        </div>
+                                                                        <div class="kt-widget__details">
+                                                                                <span class="kt-widget__title">Requests on hold</span>
+                                                                                <a href="#" class="kt-widget__value kt-font-brand">{{ person.messages|length }}</a>
+                                                                        </div>
+                                                                </div>
+                                                        {% endif %}
+
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 {% endblock %}
 
 
