@@ -27,7 +27,7 @@ class Messages
     private $body;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
      */
     private $admin;

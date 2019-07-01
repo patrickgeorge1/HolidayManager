@@ -30,36 +30,42 @@ class BenefitsController extends AbstractController
      */
     public function adminListBenefits(Request $request)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e user il trimit pe ruta lui
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("benefits_user_list");
 
-        $benefits = $this -> benefitsRepository -> findAll();
+
+        try {
+            $benefits = $this -> benefitsRepository -> findAll();
 
 
-        // crez forma pe baza clasei sale
-        $form = $this->createForm(AddBenefitType::class);
+            // crez forma pe baza clasei sale
+            $form = $this->createForm(AddBenefitType::class);
 
-        // permit formei sa ia informatiile din requesturi
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            // benefit tine informatia transmisa prin form, si este deja o clasa pt ca am mapat forma la o clasa
-            /** @var $benefit Users */  // ajut php storm sa stie ca e clasa cu get si set
-            $benefit = $form->getData();
+            // permit formei sa ia informatiile din requesturi
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                // benefit tine informatia transmisa prin form, si este deja o clasa pt ca am mapat forma la o clasa
+                /** @var $benefit Users */  // ajut php storm sa stie ca e clasa cu get si set
+                $benefit = $form->getData();
 
-            $this -> entityManager->persist($benefit);
-            $this -> entityManager->flush();
-            return $this->redirectToRoute("benefits_admin_list");
+                $this -> entityManager->persist($benefit);
+                $this -> entityManager->flush();
+                return $this->redirectToRoute("benefits_admin_list");
+            }
+
+
+            return $this->render('benefits/listBenefitsAdmin.html.twig', [
+                'benefits' => $benefits,
+                'user_display' => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'addBenefit' => $form->createView(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-
-
-        return $this->render('benefits/listBenefitsAdmin.html.twig', [
-            'benefits' => $benefits,
-            'user_display' => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'addBenefit' => $form->createView(),
-            'person' => $this->getUser()
-        ]);
     }
 
 
@@ -69,17 +75,23 @@ class BenefitsController extends AbstractController
      */
     public function listBenefits(Request $request)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e admin il trimit pe ruta lui
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("benefits_admin_list");
 
-        $benefits = $this -> getUser() -> getBenefits();
-        return $this->render('benefits/listBenefits.html.twig', [
-            'benefits' => $benefits,
-            'user_display' => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser()
-        ]);
+
+        try {
+            $benefits = $this -> getUser() -> getBenefits();
+            return $this->render('benefits/listBenefits.html.twig', [
+                'benefits' => $benefits,
+                'user_display' => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
     }
 
 
@@ -88,40 +100,41 @@ class BenefitsController extends AbstractController
      */
     public function giveBenefits(Request $request)
     {
-
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e admin il trimit pe ruta lui
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("benefits_user_list");
 
 
-        $form = $this->createForm(GiveBenefitType::class);
 
-        $form->handleRequest($request);
-        $benefits = $this -> getUser() -> getBenefits();
+        try {
+            $form = $this->createForm(GiveBenefitType::class);
 
-        if($form->isSubmitted() && $form->isValid()) {
+            $form->handleRequest($request);
+            $benefits = $this -> getUser() -> getBenefits();
 
-            // info va un array de obj {benefits, user}
-            $info = $form->getData();
-            $benefit = $info["name"];
-            $user = $info["users"];
-            $benefit->addUser($user);
+            if($form->isSubmitted() && $form->isValid()) {
+
+                // info va un array de obj {benefits, user}
+                $info = $form->getData();
+                $benefit = $info["name"];
+                $user = $info["users"];
+                $benefit->addUser($user);
 
 
-            $this -> entityManager->persist($benefit);
-            $this -> entityManager->flush();
-            return $this -> redirectToRoute("benefits_admin_give");
+                $this -> entityManager->persist($benefit);
+                $this -> entityManager->flush();
+                return $this -> redirectToRoute("benefits_admin_give");
+            }
+            return $this->render('benefits/giveBenefits.html.twig', [
+                'giveBenefitForm' => $form->createView(),
+                'benefits' => $benefits,
+                'user_display' => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-        return $this->render('benefits/giveBenefits.html.twig', [
-            'giveBenefitForm' => $form->createView(),
-            'benefits' => $benefits,
-            'user_display' => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser()
-        ]);
-
-
-
-
     }
 }

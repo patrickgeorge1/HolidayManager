@@ -6,6 +6,7 @@ use App\Entity\Messages;
 use App\Entity\User;
 use App\Form\EditUserType;
 use App\Form\RegistrationFormType;
+use App\Repository\DemandsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,13 +45,15 @@ class UserController extends AbstractController
         else
             return new Response("Nu esti admin");
         */
-
-
-        return $this->render('main/index.html.twig', [
-            "user_display" => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser()
-        ]);
+        try {
+            return $this->render('main/index.html.twig', [
+                "user_display" => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
     }
 
     /**
@@ -60,24 +63,22 @@ class UserController extends AbstractController
     {
     }
 
-    /**
-     * @Route("/mail", name="mail", methods={"GET", "POST"})
-     */
-    public function mail(\Swift_Mailer $mailer, Request $request)
+
+    public function mail(\Swift_Mailer $mailer, $target_person, $message_title, $message_text)
     {
-        $text = $request->get("message");
-
-        $message = (new \Swift_Message("Mesaj"))
-            ->setFrom('msend28@gmail.com')
-            ->setTo("patrionpatrick@gmail.com")
-            ->setBody(
-                $text,
-                'text/plain'
-            );
-
-        $mailer->send($message);
-
-        return new Response("mail sent!");
+        try {
+            $text = $message_text;
+            $message = (new \Swift_Message($message_title))
+                ->setFrom('msend28@gmail.com')
+                ->setTo($target_person)
+                ->setBody(
+                    $text,
+                    'text/plain'
+                );
+            $mailer->send($message);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
     }
 
 
@@ -86,7 +87,11 @@ class UserController extends AbstractController
      */
     public function messages()
     {
-        return $this->render("main/messages.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
+        try {
+            return $this->render("main/messages.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
     }
 
 
@@ -95,6 +100,7 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e admin il duc pe ruta lui
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("admin_list");
@@ -124,6 +130,7 @@ class UserController extends AbstractController
      */
     public function deleteAdmin(UserRepository $userRepository, User $user)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // ruta cu privilegii
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
@@ -145,40 +152,56 @@ class UserController extends AbstractController
      */
     public function editUser(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // ruta cu privilegii
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
 
-        // creez forma pe baza clasei, USER o sa fie entitatea din tabela coresp referintei $id
-        $form = $this->createForm(EditUserType::class, $user);
 
-        // permit formei sa ia informatiile din requesturi
-        $form->handleRequest($request);
+        try {
+            // creez forma pe baza clasei, USER o sa fie entitatea din tabela coresp referintei $id
+            $form = $this->createForm(EditUserType::class, $user);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // o sa l faca automat de tipul User
-            $user = $form->getData();
+            // permit formei sa ia informatiile din requesturi
+            $form->handleRequest($request);
 
-            // fac hash la parola
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->getData()->getPassword()
-                )
-            );
-            // editez in db
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            return $this->redirectToRoute("admin_list");
+            if ($form->isSubmitted() && $form->isValid()) {
+                // o sa l faca automat de tipul User
+
+
+
+                // TODO repair edit user
+                $formInfo = $form->getData();
+                if (empty($formInfo->getPassword())) {
+                    $user->setPassword(
+                        $passwordEncoder->encodePassword(
+                            $user,
+                            $form->getData()->getPassword()
+                        )
+                    );
+                } else $user->setPassword($pass);
+
+                $user->setEmail($formInfo->getEmail());
+                $user->setPhone($formInfo->getPhone());
+                $user->setFirstName($formInfo->getFirstName());
+                $user->setLastName($formInfo->getLastName());
+
+                // editez in db
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                return $this->redirectToRoute("admin_list");
+            }
+
+            // randez twig cu parm view form
+            return $this->render('users/edit.html.twig', [
+                'editForm' => $form->createView(),
+                "user_display" => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-
-        // randez twig cu parm view form
-        return $this->render('users/edit.html.twig', [
-            'editForm' => $form->createView(),
-            "user_display" => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser()
-        ]);
     }
 
 
@@ -187,52 +210,78 @@ class UserController extends AbstractController
      */
     public function listAdmin(UserRepository $userRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e user il trimit pe ruta lui
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
 
-        // extrag info din db
+        try {
+            // extrag info din db
 
-        $all = $userRepository->findAll();
-        $stationary = array();
-        foreach ($all as $user) {
-            $now = array();
-            $now["id"] = $user->getId();
-            $now["first_name"] = $user->getFirstName();
-            $now["last_name"] = $user->getLastName();
-            $now["email"] = $user->getEmail();
-            $now["phone"] = $user->getPhone();
-            array_push($stationary, $now);
+            $all = $userRepository->findAll();
+            $stationary = array();
+            foreach ($all as $user) {
+                $now = array();
+                $now["id"] = $user->getId();
+                $now["first_name"] = $user->getFirstName();
+                $now["last_name"] = $user->getLastName();
+                $now["email"] = $user->getEmail();
+                $now["phone"] = $user->getPhone();
+                array_push($stationary, $now);
+            }
+
+
+            // fac forma de adaugat useri !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            $user = new User();
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setRoles("ROLE_USER");
+                $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+                return $this->redirectToRoute("admin_list");
+            }
+
+            $param = array("users" => $stationary, "registrationForm" => $form->createView(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
+
+
+            //return $this->render("users/listAdmin.html.twig", $param);
+            return $this->render("users/listAdmin.html.twig", $param);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-
-
-        // fac forma de adaugat useri !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles("ROLE_USER");
-            $user->setPassword($passwordEncoder->encodePassword($user, $form->get('plainPassword')->getData()));
-
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            return $this->redirectToRoute("admin_list");
-        }
-
-        $param = array("users" => $stationary, "registrationForm" => $form->createView(), "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
-
-
-        //return $this->render("users/listAdmin.html.twig", $param);
-        return $this->render("users/listAdmin.html.twig", $param);
     }
 
     /**
      * @Route(" /profile/user", name="profile_user", methods={"GET", "POST"})
      */
-    public function profile()
+    public function profile(DemandsRepository $demandsRepository)
     {
+        try {
+            if (!$this->getUser()) return $this->redirectToRoute("app_login");
+            $demands = $demandsRepository -> findBy(['status' => 1]);
+            return $this->render("users/profile.html.twig", array(
+                    "user_display" => $this->getUser()->getFirstName(),
+                    'profile' => $this->getUser()->getId(),
+                    'person' => $this->getUser(),
+                    'demands'=> $demands
+                )
+            );
+        } catch (\Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
 
-        return $this->render("users/profile.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
+    }
+
+
+    /**
+     * @Route("/modal", methods={"POST", "GET"})
+     */
+    public function modal(DemandsRepository $demandsRepository) {
+        $nr = $demandsRepository -> findAll();
+        return new Response("blah");
     }
 
 }

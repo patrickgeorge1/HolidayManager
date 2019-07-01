@@ -16,7 +16,10 @@ class EditUserType extends AbstractType
     {
         $builder
             ->add("email")
-            ->add("password", PasswordType::class)
+            ->add("password", PasswordType::class,[
+                'required' => false,
+                'empty_data' => ""
+            ])
             ->add("first_name")
             ->add("last_name")
             ->add("phone")

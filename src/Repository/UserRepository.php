@@ -22,19 +22,16 @@ class UserRepository extends ServiceEntityRepository
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findUserByRole($role)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('u');
+        $qb->where($qb->expr()->like('u.roles', ':role'))
+           ->setParameter('role','%'.$role.'%');
+        $result = $qb->getQuery()
+                     ->getResult();
+        return $result;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?User

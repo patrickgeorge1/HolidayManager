@@ -29,25 +29,30 @@ class MessagesController extends AbstractController
      */
     public function messages()
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca un admin incearca sa intre pe user
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("messages_admin");
 
-        // randez twig de user
-        $collection = $this->messagesRepository->findAll();
-        $param = array();
-        foreach ( $collection as $individual) {
-            $now = array();
-            $now["admin"] = $individual->getAdmin()->getEmail();
-            $now["title"] = $individual->getTitle();
-            $now["body"]  = $individual->getBody();
-            array_push($param, $now);
+        try {
+            // randez twig de user
+            $collection = $this->messagesRepository->findAll();
+            $param = array();
+            foreach ( $collection as $individual) {
+                $now = array();
+                $now["admin"] = $individual->getAdmin()->getEmail();
+                $now["title"] = $individual->getTitle();
+                $now["body"]  = $individual->getBody();
+                array_push($param, $now);
+            }
+            $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
+
+
+
+            return $this->render('messages/display.html.twig', $mesaj);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
-
-
-
-        return $this->render('messages/display.html.twig', $mesaj);
     }
 
 
@@ -56,27 +61,30 @@ class MessagesController extends AbstractController
      */
     public function messagesAdmin()
     {
-
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca incearca un user sa intre pe admin
         $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
-        // randez twig de admin
-        $collection = $this->messagesRepository->findAll();
-        $param = array();
-        foreach ( $collection as $individual) {
-            $now = array();
-            $now["id"] = $individual->getId();
-            $now["admin"] = $individual->getAdmin()->getEmail();
-            $now["title"] = $individual->getTitle();
-            $now["body"]  = $individual->getBody();
-            array_push($param, $now);
+        try {
+            // randez twig de admin
+            $collection = $this->messagesRepository->findAll();
+            $param = array();
+            foreach ( $collection as $individual) {
+                $now = array();
+                $now["id"] = $individual->getId();
+                $now["admin"] = $individual->getAdmin()->getEmail();
+                $now["title"] = $individual->getTitle();
+                $now["body"]  = $individual->getBody();
+                array_push($param, $now);
+            }
+            $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(),'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
+
+
+            return $this->render('messages/displayAdmin.html.twig', $mesaj);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-        $mesaj = array("mesaj" => $param, "user_display" => $this->getUser()->getFirstName(),'profile' => $this->getUser()->getId(), 'person' => $this->getUser());
-
-
-
-        return $this->render('messages/displayAdmin.html.twig', $mesaj);
     }
 
 
@@ -85,27 +93,32 @@ class MessagesController extends AbstractController
      */
     public function addMessage(Request $request)
     {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca incearca un user sa intre pe admin
         $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
-        $form = $this->createForm(AddMessageType::class);
-        $form->handleRequest($request);
+        try {
+            $form = $this->createForm(AddMessageType::class);
+            $form->handleRequest($request);
 
 
-        if($form->isSubmitted() && $form->isValid()) {
-            /** @var $message Messages */
-            $message = $form->getData();
-            $message->setAdmin($this->getUser());
-            $this -> entityManager->persist($message);
-            $this -> entityManager->flush();
-            return $this ->redirectToRoute("messages_admin");
+            if($form->isSubmitted() && $form->isValid()) {
+                /** @var $message Messages */
+                $message = $form->getData();
+                $message->setAdmin($this->getUser());
+                $this -> entityManager->persist($message);
+                $this -> entityManager->flush();
+                return $this ->redirectToRoute("messages_admin");
+            }
+            return $this->render('messages/createMessage.html.twig', [
+                'addMessage' => $form->createView(),
+                'user_display' => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser()
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-        return $this->render('messages/createMessage.html.twig', [
-            'addMessage' => $form->createView(),
-            'user_display' => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser()
-        ]);
     }
 
 
@@ -114,30 +127,36 @@ class MessagesController extends AbstractController
      */
     public function updateMessage(Messages $message, MessagesRepository $messagesRepository, Request $request)
     {
-
-        // iau prin {id} obj de tip message si l dau in create form ca param ca sa interpreteze ca edit form
-        $form = $this->createForm(EditMessageType::class,$message);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            /** @var $message Messages */
-            $message->setAdmin($this->getUser());
-            // nu mai e nevoie de persist
-            $this -> entityManager->flush();
-            return $this -> redirectToRoute("messages_admin");
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
+        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+        try {
+            // iau prin {id} obj de tip message si l dau in create form ca param ca sa interpreteze ca edit form
+            $form = $this->createForm(EditMessageType::class,$message);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()) {
+                /** @var $message Messages */
+                $message->setAdmin($this->getUser());
+                // nu mai e nevoie de persist
+                $this -> entityManager->flush();
+                return $this -> redirectToRoute("messages_admin");
+            }
+            return $this->render('messages/updateMessage.html.twig', [
+                'editForm' => $form->createView(),
+                "user_display" => $this->getUser()->getFirstName(),
+                'profile' => $this->getUser()->getId(),
+                'person' => $this->getUser(),
+                'message' => $message
+            ]);
+        } catch (Exception $e) {
+            return $this->redirectToRoute("app_login");
         }
-        return $this->render('messages/updateMessage.html.twig', [
-            'editForm' => $form->createView(),
-            "user_display" => $this->getUser()->getFirstName(),
-            'profile' => $this->getUser()->getId(),
-            'person' => $this->getUser(),
-            'message' => $message
-        ]);
     }
 
     /**
      * @Route("/admin/messages/update/{id}/post", name="messages_admin_update_post", methods={"POST", "GET"})
      */
     public function updatePost (Request $request, MessagesRepository $messagesRepository, $id) {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca incearca un user sa intre pe admin
         $rol = $this->getUser()->getRoles();
         if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
@@ -151,7 +170,7 @@ class MessagesController extends AbstractController
             $now->setBody($message);
             $this->entityManager->persist($now);
             $this->entityManager->flush();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("messages_admin", array("error" => $e->getMessage()));
         }
         return $this->redirectToRoute("messages_admin");
@@ -163,10 +182,18 @@ class MessagesController extends AbstractController
      */
     public function deleteMessage($id, MessagesRepository $messagesRepository)
     {
-        $now = $messagesRepository->findOneBy(["id" => $id]);
-        $this -> entityManager -> remove($now);
-        $this -> entityManager -> flush();
-        return $this->redirectToRoute("messages_admin");
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
+        // daca incearca un user sa intre pe admin
+        $rol = $this->getUser()->getRoles();
+        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+        try {
+            $now = $messagesRepository->findOneBy(["id" => $id]);
+            $this -> entityManager -> remove($now);
+            $this -> entityManager -> flush();
+            return $this->redirectToRoute("messages_admin");
+        } catch (\Exception $e) {
+            return $this->redirectToRoute("app_login");
+        }
     }
 
 }

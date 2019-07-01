@@ -111,15 +111,7 @@
                                                                 </div>
                                                         </div>
 
-                                                        <div class="kt-widget__item">
-                                                                <div class="kt-widget__icon">
-                                                                        <i class="flaticon-file-2"></i>
-                                                                </div>
-                                                                <div class="kt-widget__details">
-                                                                        <span class="kt-widget__title">demands</span>
-                                                                        <a href="#" class="kt-widget__value kt-font-brand">{{ person.demands|length }}</a>
-                                                                </div>
-                                                        </div>
+
 
                                                         {% if person.roles[0] == "ROLE_ADMIN" %}
                                                                 <div class="kt-widget__item">
@@ -127,14 +119,112 @@
                                                                                 <i class="flaticon-chat-1"></i>
                                                                         </div>
                                                                         <div class="kt-widget__details">
-                                                                                <span class="kt-widget__title">Requests on hold</span>
+                                                                                <span class="kt-widget__title">Messages on hold</span>
                                                                                 <a href="#" class="kt-widget__value kt-font-brand">{{ person.messages|length }}</a>
+                                                                        </div>
+                                                                </div>
+                                                        {% elseif person.roles[0] == "ROLE_USER" %}
+                                                                {% set nr = 0 %}
+                                                                {% for request in person.demands %}
+                                                                        {% if request.status == 1 %}
+                                                                                {% set nr = nr + 1 %}
+                                                                        {% endif %}
+                                                                {% endfor %}
+                                                                <div class="kt-widget__item">
+                                                                        <div class="kt-widget__icon">
+                                                                                <i class="flaticon-chat-1"></i>
+                                                                        </div>
+                                                                        <div class="kt-widget__details">
+                                                                                <span class="kt-widget__title">Requests on hold</span>
+                                                                                <a href="#" class="kt-widget__value kt-font-brand">{{ nr }}</a>
+                                                                        </div>
+                                                                </div>
+                                                        {% endif %}
+
+                                                        {% if person.roles[0] == "ROLE_USER" %}
+                                                                <div class="kt-widget__item">
+                                                                        <div class="kt-widget__icon">
+                                                                                <i class="flaticon-file-2"></i>
+                                                                        </div>
+                                                                        <div class="kt-widget__details">
+                                                                                <span class="kt-widget__title">Total requests</span>
+                                                                                <a href="#" class="kt-widget__value kt-font-brand">{{ person.demands|length }}</a>
+                                                                        </div>
+                                                                </div>
+                                                        {% else %}
+                                                                <div class="kt-widget__item">
+                                                                        <div class="kt-widget__icon">
+                                                                                <i class="flaticon-file-2"></i>
+                                                                        </div>
+                                                                        <div class="kt-widget__details">
+                                                                                <span class="kt-widget__title">Requests on hold</span>
+                                                                                <a href="#" class="kt-widget__value kt-font-brand">
+                                                                                        {% set nr = 0 %}
+                                                                                        {% for demand in demands %}
+                                                                                                {% if demand.status == 1 %}
+                                                                                                        {% set nr = nr + 1 %}
+                                                                                                {% endif %}
+                                                                                        {% endfor %}
+                                                                                        {% if nr == 0 %}
+                                                                                                nothing
+                                                                                        {% else %}
+                                                                                                {{ nr }}
+                                                                                        {% endif %}
+                                                                                </a>
                                                                         </div>
                                                                 </div>
                                                         {% endif %}
 
                                                 </div>
                                         </div>
+
+                                        {% if nr > 0 %}
+
+                                                <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+
+                                                <div class="kt-section">
+                                                        <div class="kt-section__content">
+                                                                <table class="table">
+                                                                        <thead class="thead-dark">
+                                                                        <tr>
+                                                                                <th>#</th>
+                                                                                <th>User</th>
+                                                                                <th>Email</th>
+                                                                                <th>Phone</th>
+                                                                                <th>Date</th>
+                                                                                <th>Duration</th>
+                                                                                <th></th>
+                                                                                <th></th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                                {% for demand in demands %}
+                                                                                        <tr>
+                                                                                                <th scope="row">{{ loop.index }}</th>
+                                                                                                <td>{{ demand.employee.firstName }}</td>
+                                                                                                <td>{{ demand.employee.email }}</td>
+                                                                                                <td>{{ demand.employee.phone }}</td>
+                                                                                                <td>{{ demand.date|date('d-m-Y') }}</td>
+                                                                                                <td>{{ demand.duration }}</td>
+                                                                                                <td>
+                                                                                                        <a href="/demand/accept/{{ demand.id }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                                                                <i class="flaticon-like"></i>
+                                                                                                                Accept
+                                                                                                        </a>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                        <a href="/demand/decline/{{ demand.id }}" class="btn btn-outline btn-circle btn-sm purple">
+                                                                                                                <i class="flaticon-circle"></i>
+                                                                                                                Decline
+                                                                                                        </a>
+                                                                                                </td>
+                                                                                        </tr>
+                                                                                {% endfor %}
+                                                                        </tbody>
+                                                                </table>
+                                                        </div>
+                                                </div>
+                                        {% endif %}
                                 </div>
                         </div>
                 </div>
