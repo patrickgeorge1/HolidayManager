@@ -3,11 +3,50 @@
 {% block title %}Hello MessagesController!{% endblock %}
 
 
+{% block css %}
+    {{ parent() }}
+    <link href='assets/css/core/main.css' rel='stylesheet' />
+    <link href='assets/css/daygrid/main.css' rel='stylesheet' />
+
+    <script src='assets/js/calendar/core/main.js'></script>
+    <script src='assets/js/calendar/daygrid/main.js'></script>
+    <script src='assets/js/calendar/plugins/interaction/main.js'></script>
+{% endblock %}
+
+
 {% block body %}
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="kt-portlet kt-portlet--tab ">
+                <div class="kt-portlet__body">
+                    <!-- Calendar -->
+                    <div id='calendar'></div>
+                    <!-- End of calendar -->
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+{% block jsScripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            var calendarEl = document.getElementById('calendar');
+
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: [ 'dayGrid' ],
+                events: 'calendarTool',
+            });
+            calendar.render();
+        });
+    </script>
+
+
+{%  endblock %}

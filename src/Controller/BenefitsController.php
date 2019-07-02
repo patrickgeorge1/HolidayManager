@@ -60,8 +60,9 @@ class BenefitsController extends AbstractController
                 'benefits' => $benefits,
                 'user_display' => $this->getUser()->getFirstName(),
                 'profile' => $this->getUser()->getId(),
-                'addBenefit' => $form->createView(),
-                'person' => $this->getUser()
+                'person' => $this->getUser(),
+                'addBenefit' => $form->createView()
+
             ]);
         } catch (Exception $e) {
             return $this->redirectToRoute("app_login");

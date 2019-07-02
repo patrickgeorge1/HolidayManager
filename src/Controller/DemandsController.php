@@ -3,10 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Demands;
+use App\Entity\Events;
 use App\Entity\User;
+use App\Repository\DemandsRepository;
 use App\Repository\UserRepository;
+use App\Service\CalendarService;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Env\Response;
+use Symfony\Component\HttpFoundation\Response;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +32,7 @@ class DemandsController extends AbstractController
     /**
      * @Route("/request/holiday", name="request_holiday", methods={"POST"})
      */
-    public function request(Request $request)
+    public function request(Request $request, CalendarService $calendarService)
     {
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e admin il trimit pe ruta lui
@@ -37,7 +41,18 @@ class DemandsController extends AbstractController
         if ($rol[0] == "ROLE_ADMIN")
         {
             // TODO note in calendar
-            if ($user -> getFreeDays() - $duration < 0) return new \Symfony\Component\HttpFoundation\Response("Not enough free days !");
+            $start_date = $request->get("start_date");
+            $end_date = $request->get("end_date");
+            $duration = $this->date_diff($start_date, $end_date);
+
+            if ($this -> getUser() -> getFreeDays() - $duration < 0) return new Response("Not enough free days !");
+            else {
+
+                //dd($request->get("start_date"));
+                //dd(\DateTime::createFromFormat('m/d/Y', $request->get("start_date")));
+                $calendarService->program2($this -> entityManager, $request->get("title"), $request->get("start_date"), $request->get("end_date"));
+                return $this->redirectToRoute("calendar");
+            }
         }
         else
             try {
@@ -91,7 +106,7 @@ class DemandsController extends AbstractController
             $start = strtotime($start_date);
             $datediff = $end - $start;
             return round($datediff / (60 * 60 * 24)) + 1;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -99,18 +114,22 @@ class DemandsController extends AbstractController
     /**
      * @Route("/demand/accept/{id}", name="demand_accept", methods={"GET"})
      */
-    public function accept_demand(Demands $demand)
+    public function accept_demand(Demands $demand, CalendarService $calendarService)
     {
-        try {
+
             // vad daca e logat
             if (!$this->getUser()) return $this->redirectToRoute("app_login");
             $rol = $this->getUser()->getRoles();
             if ($rol[0] == "ROLE_ADMIN")
-                try {
+            {
+
                     if ($demand->getEmployee()->getFreeDays() - $demand->getDuration() >= 0)
                     {
                         $demand->setStatus(0);
                         // TODO add on calenar
+                        $endDate = date('Y-m-d', strtotime($demand->getDate()->format('d M Y'). ' + '.$demand ->getDuration().' days'));
+                        $calendarService->program($this -> entityManager, $demand->getName(), $demand->getDate()->format('Y-m-d'), $endDate);
+
 
 
                         // send mail
@@ -124,21 +143,19 @@ class DemandsController extends AbstractController
                         $this->entityManager->flush();
                         return $this->redirectToRoute("profile_user");
                     }
-                    else return new \Symfony\Component\HttpFoundation\Response("Baiatul si depasit zilele intre timp");
-                } catch (\Exception $e) {
-                    echo 'Caught exception: ',  $e->getMessage(), "\n";
-                }
-            else return new \Symfony\Component\HttpFoundation\Response("Ce cauta un user pe link de admin ?");
-        } catch (Exception $e) {
-         return $this->redirectToRoute("app_login");
-        }
+                    else return new Response("Baiatul si depasit zilele intre timp");
+
+            }
+            else return new Response("Ce cauta un user pe link de admin ?");
+
+
     }
 
 
     /**
      * @Route("/demand/decline/{id}", name="demand_decline", methods={"GET"})
      */
-    public function decline_demand(Demands $demand)
+    public function decline_demand(Demands $demand, CalendarService $calendarService)
     {
         // vad daca e logat
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
@@ -146,7 +163,6 @@ class DemandsController extends AbstractController
         if ($rol[0] == "ROLE_ADMIN")
             try {
                 $demand->setStatus(0);
-                // TODO add on calenar
 
                 // send mail
                 $title = "Answer for ".$demand->getName()." request";
@@ -157,11 +173,10 @@ class DemandsController extends AbstractController
                 $this->entityManager->persist($demand);
                 $this->entityManager->flush();
                 return $this->redirectToRoute("profile_user");
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
         else return new Response("Ce cauta un user pe link de admin ?");
-
     }
 
     public function mail($target_person, $message_title, $message_text)
@@ -176,7 +191,7 @@ class DemandsController extends AbstractController
                     'text/plain'
                 );
             $this->mailer->send($message);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
 
@@ -185,10 +200,15 @@ class DemandsController extends AbstractController
     /**
      * @Route("/blah")
      */
-    public function nothing(UserRepository $userRepository) {
-        $roles[] = 'ROLE_USER';
-        $res = $userRepository->findUserByRole('ROLE_ADMIN');
-        dd($res);
+    public function nothing(DemandsRepository $demandsRepository) {
+        $res = $demandsRepository->findOneBy(["id" => 1]);
+        //dd($res->getDate()->format('d M Y'));  // asa convertesc date time to string
+        $duration = 7;
+        dd(
+
+            date('Y-m-d', strtotime($res->getDate()->format('d M Y'). ' + '.$duration.' days'))
+
+        );
 
     }
 

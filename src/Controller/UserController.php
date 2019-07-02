@@ -161,6 +161,7 @@ class UserController extends AbstractController
         try {
             // creez forma pe baza clasei, USER o sa fie entitatea din tabela coresp referintei $id
             $form = $this->createForm(EditUserType::class, $user);
+            $form->remove('password');
 
             // permit formei sa ia informatiile din requesturi
             $form->handleRequest($request);
@@ -170,16 +171,8 @@ class UserController extends AbstractController
 
 
 
-                // TODO repair edit user
                 $formInfo = $form->getData();
-                if (empty($formInfo->getPassword())) {
-                    $user->setPassword(
-                        $passwordEncoder->encodePassword(
-                            $user,
-                            $form->getData()->getPassword()
-                        )
-                    );
-                } else $user->setPassword($pass);
+
 
                 $user->setEmail($formInfo->getEmail());
                 $user->setPhone($formInfo->getPhone());
