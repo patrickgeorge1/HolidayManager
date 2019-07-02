@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/css/core/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/css/daygrid/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/js/calendar/core/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/js/calendar/daygrid/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/js/calendar/plugins/interaction/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/assets/js/calendar/plugins/interaction/main.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/CalendarService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/calendar/calendarAdmin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BenefitsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/BenefitsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DemandsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DemandsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/benefits/listBenefitsAdmin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/benefits/listBenefitsAdmin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/calendar/calendar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/calendar/calendar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/edit.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,10 +31,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Service/CalendarService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="607">
+            <state relative-caret-position="748">
               <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
               <folding>
                 <element signature="e#33#55#0#PHP" expanded="true" />
@@ -58,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/DemandsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="107" column="54" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="54" />
+            <state relative-caret-position="281">
+              <caret line="51" column="71" selection-start-line="51" selection-start-column="71" selection-end-line="51" selection-end-column="71" />
               <folding>
                 <element signature="e#34#57#0#PHP" expanded="true" />
               </folding>
@@ -187,8 +172,8 @@
         <option value="$PROJECT_DIR$/src/Controller/BenefitsController.php" />
         <option value="$PROJECT_DIR$/src/Controller/CalendarController.php" />
         <option value="$PROJECT_DIR$/templates/benefits/listBenefitsAdmin.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/DemandsController.php" />
         <option value="$PROJECT_DIR$/src/Service/CalendarService.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DemandsController.php" />
       </list>
     </option>
   </component>
@@ -284,7 +269,7 @@
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-1784" />
     <option name="y" value="-8" />
     <option name="width" value="848" />
@@ -369,12 +354,12 @@
       <workItem from="1561623993394" duration="9000" />
       <workItem from="1561624952401" duration="23987000" />
       <workItem from="1561703906247" duration="45669000" />
-      <workItem from="1562050291957" duration="21308000" />
+      <workItem from="1562050291957" duration="22028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153025000" />
+    <option name="totallyTimeSpent" value="153745000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
@@ -383,7 +368,7 @@
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.1748401" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" weight="0.32606438" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.32606438" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.32606438" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -798,16 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DemandsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="107" column="54" selection-start-line="107" selection-start-column="53" selection-end-line="107" selection-end-column="54" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/BenefitsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="598">
@@ -820,10 +795,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/CalendarService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="607">
+        <state relative-caret-position="748">
           <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
           <folding>
             <element signature="e#33#55#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DemandsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="51" column="71" selection-start-line="51" selection-start-column="71" selection-end-line="51" selection-end-column="71" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

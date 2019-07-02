@@ -47,9 +47,9 @@ class DemandsController extends AbstractController
 
             if ($this -> getUser() -> getFreeDays() - $duration < 0) return new Response("Not enough free days !");
             else {
-
-                //dd($request->get("start_date"));
-                //dd(\DateTime::createFromFormat('m/d/Y', $request->get("start_date")));
+                /** @var User  $user */
+                $user = $this->getUser();
+                $user -> setFreeDays($user->getFreeDays() - $duration);
                 $calendarService->program2($this -> entityManager, $request->get("title"), $request->get("start_date"), $request->get("end_date"));
                 return $this->redirectToRoute("calendar");
             }
