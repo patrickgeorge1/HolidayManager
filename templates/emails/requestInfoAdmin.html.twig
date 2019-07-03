@@ -1,0 +1,10 @@
+<html>
+<head>
+
+</head>
+<body>
+<p>
+    User {{ demand.employee.firstName }} {{ demand.employee.lastName }} request a holiday of {{ demand.duration }} day/s starting on {{ demand.date|date('d/m/Y') }}" .  Request name : {{ demand.name }}" .  To accept <a href="{{ base_href }}demand/accept/{{ demand.id }}">Accept</a>  or to decline <a href="{{ base_href }}demand/decline/{{ demand.id }}">Decline</a>.
+</p>
+</body>
+</html>

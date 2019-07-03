@@ -1,0 +1,10 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p>
+            Dear {{ demand.employee.firstName }} {{ demand.employee.lastName }}, your holiday request of {{ demand.duration }} day/s starting on {{ demand.date|date('d/m/Y') }} was sent and a admin will ask soon .  Request name : {{ demand.name }}
+        </p>
+    </body>
+</html>

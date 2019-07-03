@@ -6,8 +6,11 @@ use App\Entity\Demands;
 use App\Entity\Events;
 use App\Entity\User;
 use App\Repository\DemandsRepository;
+use App\Repository\EventsRepository;
 use App\Repository\UserRepository;
 use App\Service\CalendarService;
+use App\Service\MailService;
+use App\Service\MlService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use mysql_xdevapi\Exception;
@@ -21,7 +24,7 @@ class DemandsController extends AbstractController
     private $mailer;
     private $admins;
 
-    public function __construct(EntityManagerInterface $entityManager, \Swift_Mailer $mailer, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, MailService $mailer, UserRepository $userRepository)
     {
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
@@ -83,14 +86,19 @@ class DemandsController extends AbstractController
                     // send mail to EVERY admin
                     foreach ($this->admins as $admin) {
                         $title = "Holiday request by ".$demand->getEmployee()->getFirstName();
-                        $message = "User ".$demand->getEmployee()->getFirstName()." ".$demand->getEmployee()->getLastName().", request a holiday of ".$demand->getDuration()." day/s starting on ".$demand->getDate()->format('Y-m-d')." .  Request name : ".$demand->getName()." .";
-                        $this->mail($admin->getEmail(),$title,$message);
+                        $twigPath = "emails/requestInfoAdmin.html.twig";
+                        $twigParam = array("demand" => $demand, 'base_href' => $request->getSchemeAndHttpHost().'/');
+                        $this->mailer->mail(array($admin -> getEmail()), $title, $twigPath, $twigParam);
+
                     }
 
                     // send mail to user
                     $title = "Holiday request ".$demand->getName();
-                    $message = "Dear ".$demand->getEmployee()->getFirstName().", ".$demand->getEmployee()->getLastName()." your holiday request of ".$demand->getDuration()." day/s starting on ".$demand->getDate()->format('Y-m-d')." was sent and a admin will ask soon .  Request name : ".$demand->getName()." .";
-                    $this->mail($demand->getEmployee()->getEmail(),$title,$message);
+                    $twigPath = "emails/requestInfoUser.html.twig";
+                    $twigParam = array("demand" => $demand, 'base_href' => $request->getSchemeAndHttpHost().'/');
+                    $this -> mailer->mail(array($demand->getEmployee()->getEmail()), $title, $twigPath, $twigParam);
+
+
                 }
                 return $this->redirectToRoute("benefits_user_list");
             } catch (\Exception $e) {
@@ -114,7 +122,7 @@ class DemandsController extends AbstractController
     /**
      * @Route("/demand/accept/{id}", name="demand_accept", methods={"GET"})
      */
-    public function accept_demand(Demands $demand, CalendarService $calendarService)
+    public function accept_demand(Demands $demand, CalendarService $calendarService, Request $request)
     {
 
             // vad daca e logat
@@ -133,9 +141,11 @@ class DemandsController extends AbstractController
 
 
                         // send mail
-                        $title =  "Answer for ".$demand->getName()." request";
-                        $message = "Congrats, your holiday request was accepted ! We wish you to have fun time and nice weather!";
-                        $this -> mail($demand->getEmployee()->getEmail(), $title, $message);
+                        $title = "Answer for ".$demand->getName()." request";
+                        $twigPath = "emails/accepted.html.twig";
+                        $this -> mailer->mail(array($demand->getEmployee()->getEmail()), $title, $twigPath, array('base_href' => $request->getSchemeAndHttpHost().'/'));
+
+
 
 
                         $demand->getEmployee()->setFreeDays($demand->getEmployee()->getFreeDays() - $demand->getDuration());
@@ -144,18 +154,26 @@ class DemandsController extends AbstractController
                         return $this->redirectToRoute("profile_user");
                     }
                     else return new Response("Baiatul si depasit zilele intre timp");
-
             }
             else return new Response("Ce cauta un user pe link de admin ?");
 
 
     }
 
+    /**
+     * @Route("/ml/test", name="demand_test", methods={"GET"})
+     */
+    public function testEmail(MlService $mlService) {
+
+        $res = $mlService -> mostWantedCatcherMonth();
+        // return new Response($res[1]);
+    }
+
 
     /**
      * @Route("/demand/decline/{id}", name="demand_decline", methods={"GET"})
      */
-    public function decline_demand(Demands $demand, CalendarService $calendarService)
+    public function decline_demand(Demands $demand, CalendarService $calendarService, Request $request)
     {
         // vad daca e logat
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
@@ -166,8 +184,8 @@ class DemandsController extends AbstractController
 
                 // send mail
                 $title = "Answer for ".$demand->getName()." request";
-                $message = "We are sorry, but we can't honor you with this holiday due to internal reasons.";
-                $this -> mail($demand->getEmployee()->getEmail(), $title, $message);
+                $twigPath = "emails/declined.html.twig";
+                $this -> mailer->mail(array($demand->getEmployee()->getEmail()), $title, $twigPath, array('base_href' => $request->getSchemeAndHttpHost().'/'));
 
 
                 $this->entityManager->persist($demand);
@@ -179,23 +197,6 @@ class DemandsController extends AbstractController
         else return new Response("Ce cauta un user pe link de admin ?");
     }
 
-    public function mail($target_person, $message_title, $message_text)
-    {
-        try {
-            $text = $message_text;
-            $message = (new \Swift_Message($message_title))
-                ->setFrom('msend28@gmail.com')
-                ->setTo($target_person)
-                ->setBody(
-                    $text,
-                    'text/plain'
-                );
-            $this->mailer->send($message);
-        } catch (\Exception $e) {
-            return $this->redirectToRoute("app_login");
-        }
-
-    }
 
     /**
      * @Route("/blah")

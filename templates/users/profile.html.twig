@@ -181,7 +181,27 @@
                                         {% if nr > 0 %}
 
                                                 <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+                                                {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                        <span class="kt-widget__title">
+                                                                <i class="flaticon-danger"></i>
+                                                                &nbsp; {{ ml_service.mostWantedCatcher()[0] }}&nbsp; of total demands were made on &nbsp;
+                                                                {% for data in ml_service.mostWantedCatcher() %}
+                                                                        {% if loop.index != 1 and loop.index < 8 %}
+                                                                                {{ data }} &nbsp;
+                                                                        {% endif %}
+                                                                {% endfor %}
+                                                                in the last 3 years .
+                                                        </span>
 
+                                                        <span class="kt-widget__title">
+                                                                <i class="flaticon-diagram"></i>
+                                                                &nbsp;
+                                                                &nbsp;{{ ml_service.mostWantedCatcherMonth()[0] }}% &nbsp; of total events of all times were placed in
+                                                                {{ ml_service.mostWantedCatcherMonth()[1] }} .
+                                                        </span>
+                                                        <div class="kt-separator kt-separator--space-sm  kt-separator--border-dashed"></div>
+
+                                                {% endif %}
                                                 <div class="kt-section">
                                                         <div class="kt-section__content">
                                                                 <table class="table">

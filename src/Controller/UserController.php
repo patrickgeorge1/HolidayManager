@@ -242,7 +242,7 @@ class UserController extends AbstractController
 
             //return $this->render("users/listAdmin.html.twig", $param);
             return $this->render("users/listAdmin.html.twig", $param);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }

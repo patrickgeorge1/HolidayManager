@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Demands;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @method Demands|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +17,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class DemandsRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Demands::class);
     }
@@ -22,19 +26,19 @@ class DemandsRepository extends ServiceEntityRepository
     // /**
     //  * @return Demands[] Returns an array of Demands objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllGreaterThanYear(string $year) : array
     {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $customDate = "01-01-".$year;
+        $year = \DateTime::createFromFormat('d-m-Y', $customDate);
+        $qb = $this-> createQueryBuilder('d');
+        $qb->where('d.date >= :date')
+        ->setParameter('date',$year->format('Y-m-d'));
+        $result = $qb->getQuery()
+            ->getResult();
+                return $result;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Demands
