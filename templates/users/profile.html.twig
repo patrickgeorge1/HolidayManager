@@ -14,7 +14,7 @@
                                         <div class="kt-widget kt-widget--user-profile-3">
                                                 <div class="kt-widget__top">
                                                         <div class="kt-widget__media kt-hidden-">
-                                                                <img src="/images/avatar.jpg" alt="image">
+                                                                <img src="/images/avatar.jpg" id="aiurea" alt="image">
                                                         </div>
                                                         <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
                                                                 JM
@@ -253,6 +253,7 @@
 
 
 
-
-
-
+{% block jsScripts %}
+        {{ parent() }}
+        <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
+{% endblock %}
