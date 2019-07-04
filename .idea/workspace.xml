@@ -2,26 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/assets/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/RecoveryService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/recovery/recovery.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/recovery/reset.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo10.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo12.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo13.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo14.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/demos/preview/demo9.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/media/users/100_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/media/users/demo1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/profile.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/8b/8b05679d58965964c542849327156bd7053fa8eecf8ea6ea5ecfaff295bf8dfe.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/8b/8b05679d58965964c542849327156bd7053fa8eecf8ea6ea5ecfaff295bf8dfe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,34 +24,38 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Service/MlService.php">
+        <entry file="file://$PROJECT_DIR$/templates/recovery/reset.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="86" column="27" selection-start-line="86" selection-start-column="27" selection-end-line="86" selection-end-column="27" />
+            <state relative-caret-position="414">
+              <caret line="84" column="75" selection-start-line="84" selection-start-column="75" selection-end-line="84" selection-end-column="75" />
               <folding>
-                <element signature="e#33#56#0#PHP" expanded="true" />
+                <element signature="e#2834#2840#0#HTML" expanded="true" />
+                <element signature="e#2841#2847#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/RecoveryController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="46" column="125" selection-start-line="46" selection-start-column="125" selection-end-line="46" selection-end-column="125" />
+              <folding>
+                <element signature="e#34#68#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/BenefitsController.php">
+        <entry file="file://$PROJECT_DIR$/src/Service/RecoveryService.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="572">
-              <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
+                <element signature="e#33#53#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/users/profile.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -73,26 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/assets/js/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/9a/9a6d25e0cc1edd5c6418cadfd55d45af0f5108e130f67425dcea0e2e26675784.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="75" column="18" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
+            <state relative-caret-position="538">
+              <caret line="126" column="7" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -109,10 +81,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/request/holiday</find>
-      <find>findBy</find>
-      <find>bene</find>
-      <find>/mail</find>
       <find>todo</find>
       <find>User</find>
       <find>user</find>
@@ -127,18 +95,22 @@
       <find>TODO</find>
       <find>MainController.php</find>
       <find>TOD</find>
-      <find>mail</find>
-      <find>mailer</find>
       <find>kt-separator kt-separator--space-sm  kt-separator--border-dashed</find>
       <find>test</find>
       <find>ro</find>
       <find>jquer</find>
       <find>/images/avatar.jpg</find>
-      <find>media/demos</find>
       <find>demos</find>
       <find>preview/demo3</find>
       <find>300_25</find>
       <find>light-logo</find>
+      <find>your con</find>
+      <find>media/demos</find>
+      <find>plainPas</find>
+      <find>passwordEncoder</find>
+      <find>mail</find>
+      <find>mailer</find>
+      <find>bas</find>
     </findStrings>
     <dirStrings>
       <dir>C:\laragon\www\Holiday_Manager\src\Repository</dir>
@@ -153,10 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Form/GiveBenefitType.php" />
-        <option value="$PROJECT_DIR$/src/Entity/User.php" />
-        <option value="$PROJECT_DIR$/templates/users/listAdmin.html.twig" />
-        <option value="$PROJECT_DIR$/templates/users/test.html.twig" />
         <option value="$PROJECT_DIR$/public/css/custom.css" />
         <option value="$PROJECT_DIR$/templates/benefits/giveBenefits.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/AddMessageType.php" />
@@ -169,7 +137,6 @@
         <option value="$PROJECT_DIR$/templates/demands/request.html.twig" />
         <option value="$PROJECT_DIR$/templates/benefits/listBenefits.html.twig" />
         <option value="$PROJECT_DIR$/src/Repository/UserRepository.php" />
-        <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Messages.php" />
         <option value="$PROJECT_DIR$/src/Controller/MessagesController.php" />
         <option value="$PROJECT_DIR$/src/Form/EditUserType.php" />
@@ -204,6 +171,11 @@
         <option value="$PROJECT_DIR$/var/cache/dev/twig/86/8623e085a818cc97ce227cd25f21e3eeea012bbf646dc8dfe98212fc901c8d19.php" />
         <option value="$PROJECT_DIR$/var/cache/dev/twig/48/48abf93b2233917cfc79adf5a96d43ccf5527854a64e8912a715b70642cf18b4.php" />
         <option value="$PROJECT_DIR$/var/cache/dev/twig/8b/8b05679d58965964c542849327156bd7053fa8eecf8ea6ea5ecfaff295bf8dfe.php" />
+        <option value="$PROJECT_DIR$/templates/recovery/recovery.html.twig" />
+        <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
+        <option value="$PROJECT_DIR$/templates/recovery/reset.html.twig" />
+        <option value="$PROJECT_DIR$/src/Service/RecoveryService.php" />
+        <option value="$PROJECT_DIR$/src/Controller/RecoveryController.php" />
       </list>
     </option>
   </component>
@@ -323,50 +295,19 @@
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="demos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="demos" type="462c0819:PsiDirectoryNode" />
-              <item name="demo4" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
@@ -376,13 +317,8 @@
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="var" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="var" type="462c0819:PsiDirectoryNode" />
-              <item name="cache" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="recovery" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -435,15 +371,16 @@
       <workItem from="1561624952401" duration="23987000" />
       <workItem from="1561703906247" duration="45669000" />
       <workItem from="1562050291957" duration="48694000" />
-      <workItem from="1562222703948" duration="3833000" />
+      <workItem from="1562222703948" duration="14723000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184244000" />
+    <option name="totallyTimeSpent" value="195134000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14072494" />
@@ -469,77 +406,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Controller/DemandsController.php</url>
+          <line>37</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/users/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="50" column="34" lean-forward="true" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/calendar/calendarAdmin.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/calendar/calendar.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/_topbar-user.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/_aside-menu.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/benefits/listBenefits.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="99" column="14" selection-start-line="99" selection-start-column="14" selection-end-line="99" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/benefits/listBenefitsAdmin.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/date/date_c.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="475" column="14" selection-start-line="475" selection-start-column="13" selection-end-line="475" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/8b/8b05679d58965964c542849327156bd7053fa8eecf8ea6ea5ecfaff295bf8dfe.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1189">
@@ -604,20 +482,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/declined.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="83" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/accepted.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -629,20 +493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="6" column="173" selection-start-line="6" selection-start-column="173" selection-end-line="6" selection-end-column="173" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/emails/requestInfoAdmin.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="161" selection-start-line="6" selection-start-column="147" selection-end-line="6" selection-end-column="161" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/MailService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="696">
-          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -667,23 +517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="29" column="17" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1167">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -745,45 +578,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DemandsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3388">
-          <caret line="168" column="10" selection-start-line="168" selection-start-column="10" selection-end-line="168" selection-end-column="10" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/MlService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="86" column="27" selection-start-line="86" selection-start-column="27" selection-end-line="86" selection-end-column="27" />
-          <folding>
-            <element signature="e#33#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/BenefitsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/images/avatar.jpg">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/users/profile.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/media/demos/preview/demo11.jpg">
       <provider selected="true" editor-type-id="images" />
@@ -800,18 +596,45 @@
     <entry file="file://$PROJECT_DIR$/public/assets/media/demos/preview/demo6.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/media/demos/demo4/footer.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/media/demos/demo4/header.jpg">
       <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/9a/9a6d25e0cc1edd5c6418cadfd55d45af0f5108e130f67425dcea0e2e26675784.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="75" column="18" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users/profile.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="15" column="84" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/BenefitsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="139" column="5" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/MlService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="86" column="27" selection-start-line="86" selection-start-column="27" selection-end-line="86" selection-end-column="27" />
+          <folding>
+            <element signature="e#33#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -820,10 +643,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/var/cache/dev/twig/9a/9a6d25e0cc1edd5c6418cadfd55d45af0f5108e130f67425dcea0e2e26675784.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="75" column="18" selection-start-line="75" selection-start-column="18" selection-end-line="75" selection-end-column="18" />
+        <state relative-caret-position="715">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/MailService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/demands/request.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-396" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/emails/accepted.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/emails/requestInfoAdmin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="254" selection-start-line="6" selection-start-column="225" selection-end-line="6" selection-end-column="254" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/calendar/calendarAdmin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1200">
+          <caret selection-end-line="82" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/emails/declined.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="83" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/messages/updateMessage.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="38" selection-start-line="38" selection-end-line="42" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/security/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="67" column="87" selection-start-line="67" selection-start-column="87" selection-end-line="67" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/recovery/recovery.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DemandsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="89" column="115" selection-start-line="89" selection-start-column="64" selection-end-line="89" selection-end-column="115" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="126" column="7" selection-start-line="126" selection-start-column="7" selection-end-line="126" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/recovery/reset.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="84" column="75" selection-start-line="84" selection-start-column="75" selection-end-line="84" selection-end-column="75" />
+          <folding>
+            <element signature="e#2834#2840#0#HTML" expanded="true" />
+            <element signature="e#2841#2847#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/RecoveryService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding>
+            <element signature="e#33#53#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/RecoveryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="46" column="125" selection-start-line="46" selection-start-column="125" selection-end-line="46" selection-end-column="125" />
+          <folding>
+            <element signature="e#34#68#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
