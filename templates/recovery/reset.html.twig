@@ -71,23 +71,5 @@
 
 {% block jsScripts %}
     {{ parent() }}
-    <script>
-        $(document).ready(function () {
-            $("#changePass").click(function () {
-                var firstInput = $("#input1").val();
-                var secondInput = $("#input2").val();
-                if (firstInput === secondInput) {
-                    $.ajax({
-                        type: "POST",
-                        url: "/performRecovery/{{ token }}",
-                        data: {'newPassword':firstInput},
-                        success: function (firstInput) {
-                            window.location.href = '{{ base_href }}'+'login';
-                        }
-                    })
-                }
-                else alert("Passwords don't match! Please retype them !");
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/alerts/recoveryRequest.js') }}" type="text/javascript"></script>
 {% endblock %}
