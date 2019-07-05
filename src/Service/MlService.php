@@ -19,11 +19,20 @@ class MlService
 {
     private $demandsRepository;
     private $eventsRepository;
+    public $regression;
 
     public function __construct(DemandsRepository $demandsRepository, EventsRepository $eventsRepository)
     {
         $this->demandsRepository = $demandsRepository;
         $this->eventsRepository = $eventsRepository;
+        $this->regression = new LeastSquares();
+
+        // data for training
+        $data = $this->getSamplesLabels();
+        $samples = $data["samples"];
+        $labels = $data["labels"];
+        // training
+        $this -> regression -> train($samples, $this -> demandMap($labels));
     }
 
 
@@ -165,40 +174,8 @@ class MlService
     }
 
 
-    /**
-     * @Route("/ml", name="ml_train")
-     */
-    public function train()
-    {
 
-        $samples = [["07.07"], ["02.03"], ["07.03"], ["07.07"], ["01.02"], ["01.02"], ["07.07"], ["08.11"], ["10.12"], ["07.07"], ["07.20"], ["10.25"]];
-        $labels = ['1', '0', '1', '1', '0', '1', '1', '1', '1', '1', '1', '0'];
 
-        $classifier = new SVC(
-            Kernel::LINEAR, // $kernel
-            100.0,            // $cost
-            3,              // $degree
-            null,           // $gamma
-            0.0,            // $coef0
-            0.001,          // $tolerance
-            100,            // $cacheSize
-            true,           // $shrinking
-            true            // $probabilityEstimates, set to true
-        );
-        $classifier->train($samples, $labels);
-
-        $dt = strtotime('06/22/2009');
-        $day = date("m", $dt);
-//        $day = date("d", $dt);
-//        dd(($classifier->predictProbability(["07.07"]))[0]);  // predict of no
-//        dd(($classifier->predictProbability(["07.07"]))[1]);  // predict of yes
-        //return new Response($day);
-        return new Response(json_encode($classifier->predictProbability(["10.25"])));
-    }
-
-    /**
-     * @Route ("/populateUsers")
-     */
     public function populateUsers(EntityManagerInterface $entityManager, UserRepository $userRepository) {
         for ($i = 5000; $i <= 6000; $i++) {
             $user = new User();
@@ -213,15 +190,11 @@ class MlService
             $entityManager->persist($user);
         }
         $entityManager->flush();
-        return new Response("Userii au fost adaugati");
     }
 
 
-
-    /**
-     * @Route ("/prepareDemandsJson")
-     */
     public function prepareDemandsJson() {
+        // make a data asset in src->mlData -> results.json
         // [day_index free_days] => [demand_yes/no]
         $days = array();
         $remaining_days = 21;
@@ -271,26 +244,35 @@ class MlService
         $fp = fopen('../src/MlData/results.json', 'w');
         fwrite($fp, json_encode($values));
         fclose($fp);
-        return new Response();
     }
 
 
-    /**
-     * @Route ("/decodeDemandsJson")
-     */
-    public function decodeDemandsJson() {
+    public function getSamplesLabels() {
         $string = file_get_contents("../src/MlData/results.json");
         $json_a = json_decode($string);
         $days = $json_a->days;
         $demands = $json_a->demands;
 
+        // prepare feed data
+        $samples = array();
+        $labels = array();
+        $i = 0;
+        foreach ($days as $day) {
+            $day_action = array();
+            array_push($day_action, ($i + 1));
+            array_push($day_action, $days[$i]);
+            array_push($samples, $day_action);
+            array_push($labels, $demands[$i]);
+            $i++;
+        }
+        return array("samples" => $samples, "labels" => $labels);
 
-        return new Response();
     }
 
 
 
     public function trainRegression() {
+        // decode demands Json Result.json
         $string = file_get_contents("../src/MlData/results.json");
         $json_a = json_decode($string);
         $days = $json_a->days;
@@ -335,15 +317,16 @@ class MlService
         // Least Squares   best aproximation
         $regression = new LeastSquares();
         $regression -> train($samples, $this -> demandMap($labels));
-        dump( (100 * ( $regression->predict([365, 21]) + 17 )) / 54 );
+//      dump( (100 * ( $regression->predict([365, 21]) + 17 )) / 54 );
+
         return new $regression;
     }
 
     // to predict Demand Ability use -->  predictAjustment(trainRegression(), $day_index, $free_days)
-    public function predictAjustment(LeastSquares $regression, $day_index, $free_days) {
+    public function predictAjustment($day_index, $free_days) {
         $corelationFactor = 17;
         $corelationMapping = 54;
-        return ((100 * ( $regression->predict([$day_index, $free_days]) + $corelationFactor )) / $corelationMapping);
+        return ((100 * ( $this -> regression->predict([$day_index, $free_days]) + $corelationFactor )) / $corelationMapping);
     }
 
 
