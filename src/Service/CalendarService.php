@@ -40,4 +40,21 @@ class CalendarService
             return 0;
         }
     }
+
+    public function curentDateIndex() {
+        $months = array(1 => 31, 2 => 28, 3 => 31, 4 => 30, 5 => 31, 6 => 30, 7 => 31, 8 => 31, 9 => 30, 10 => 31, 11 => 30, 12 => 31 );
+        $t=date('d-m-Y');
+        $sum = 0;
+
+        $month = intval(date("m",strtotime($t)));
+        $day = intval(date("d",strtotime($t)));
+        if($month == 1) $sum = $day;
+        else {
+            for ($i = 1; $i <= $month; $i++)
+                $sum += $months[$i];
+            $sum += $day;
+        }
+        return ($sum);
+
+    }
 }

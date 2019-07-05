@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/MlService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/MlService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/CalendarService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CalendarService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/listAdmin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/listAdmin.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+            <state relative-caret-position="376">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#34#57#0#PHP" expanded="true" />
               </folding>
@@ -33,23 +34,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Service/MlService.php">
+        <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+            <state relative-caret-position="560">
+              <caret line="230" column="103" selection-start-line="230" selection-start-column="103" selection-end-line="230" selection-end-column="103" />
               <folding>
-                <element signature="e#33#56#0#PHP" expanded="true" />
-                <element signature="e#714#2257#0#PHP" />
-                <element signature="e#2265#3606#0#PHP" />
-                <element signature="e#3641#4932#0#PHP" />
-                <element signature="e#4938#5311#0#PHP" />
-                <element signature="e#6561#7325#0#PHP" />
-                <element signature="e#6043#7842#0#PHP" />
-                <element signature="e#8003#8054#0#PHP" />
-                <element signature="e#7849#9516#0#PHP" />
-                <element signature="e#10674#10928#0#PHP" />
-                <element signature="e#10971#11816#0#PHP" />
+                <element signature="e#34#58#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/users/listAdmin.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -66,7 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
       <find>App\Entity\user</find>
       <find>flush</find>
       <find>edit</find>
@@ -96,6 +95,7 @@
       <find>test</find>
       <find>rand</find>
       <find>number</find>
+      <find>profile</find>
     </findStrings>
     <dirStrings>
       <dir>C:\laragon\www\Holiday_Manager\src\Repository</dir>
@@ -110,7 +110,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/messages/updateMessage.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/EditMessageType.php" />
         <option value="$PROJECT_DIR$/templates/partials/_topbar-user.html.twig" />
         <option value="$PROJECT_DIR$/templates/users/list.html.twig" />
@@ -126,7 +125,6 @@
         <option value="$PROJECT_DIR$/templates/calendar/calendar.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CalendarController.php" />
         <option value="$PROJECT_DIR$/templates/benefits/listBenefitsAdmin.html.twig" />
-        <option value="$PROJECT_DIR$/src/Service/CalendarService.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" />
         <option value="$PROJECT_DIR$/templates/emails/accepted.html.twig" />
         <option value="$PROJECT_DIR$/templates/emails/declined.html.twig" />
@@ -158,9 +156,11 @@
         <option value="$PROJECT_DIR$/src/Service/CustomerProtectionService.php" />
         <option value="$PROJECT_DIR$/src/Controller/BenefitsController.php" />
         <option value="$PROJECT_DIR$/src/Controller/DemandsController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/Service/MlService.php" />
+        <option value="$PROJECT_DIR$/src/Service/CalendarService.php" />
         <option value="$PROJECT_DIR$/src/Controller/MlController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/templates/users/listAdmin.html.twig" />
       </list>
     </option>
   </component>
@@ -281,6 +281,29 @@
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -336,21 +359,21 @@
       <workItem from="1561703906247" duration="45669000" />
       <workItem from="1562050291957" duration="48694000" />
       <workItem from="1562222703948" duration="41660000" />
-      <workItem from="1562324722010" duration="1194000" />
+      <workItem from="1562324722010" duration="2599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223265000" />
+    <option name="totallyTimeSpent" value="224670000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14232409" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14232409" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.21703011" />
+      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.21703011" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.32606438" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -372,23 +395,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="37" column="22" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-          <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/MimePart.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="51" column="17" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/emails/requestInfoUser.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -671,16 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1232">
-          <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/results.json" />
     <entry file="file://$PROJECT_DIR$/src/MlData/results.json">
       <provider selected="true" editor-type-id="text-editor" />
@@ -692,10 +688,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Service/CalendarService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
+          <folding>
+            <element signature="e#202#699#0#PHP" />
+            <element signature="e#705#1234#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Service/MlService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+        <state relative-caret-position="-174">
+          <caret line="132" selection-start-line="132" selection-end-line="132" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
             <element signature="e#714#2257#0#PHP" />
@@ -714,11 +721,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="574">
-          <caret line="37" column="8" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
+        <state relative-caret-position="376">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#34#57#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="230" column="103" selection-start-line="230" selection-start-column="103" selection-end-line="230" selection-end-column="103" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/users/listAdmin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
         </state>
       </provider>
     </entry>

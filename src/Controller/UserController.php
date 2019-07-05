@@ -9,7 +9,9 @@ use App\Form\RegistrationFormType;
 use App\Repository\DemandsRepository;
 use App\Repository\EventsRepository;
 use App\Repository\UserRepository;
+use App\Service\CalendarService;
 use App\Service\CustomerProtectionService;
+use App\Service\MlService;
 use Doctrine\ORM\EntityManagerInterface;
 use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -204,7 +206,7 @@ class UserController extends AbstractController
     /**
      * @Route("/admin/list", name="admin_list")
      */
-    public function listAdmin(UserRepository $userRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function listAdmin(UserRepository $userRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder, MlService $mlService, CalendarService $calendarService)
     {
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // daca e user il trimit pe ruta lui
@@ -216,6 +218,9 @@ class UserController extends AbstractController
 
             $all = $userRepository->findAll();
             $stationary = array();
+            $day_index = $calendarService->curentDateIndex();
+
+
             foreach ($all as $user) {
                 $now = array();
                 $now["id"] = $user->getId();
@@ -223,6 +228,7 @@ class UserController extends AbstractController
                 $now["last_name"] = $user->getLastName();
                 $now["email"] = $user->getEmail();
                 $now["phone"] = $user->getPhone();
+                $now["demandAbility"] = $mlService->predictAjustment($day_index, $user->getFreeDays());
                 array_push($stationary, $now);
             }
 
@@ -253,7 +259,7 @@ class UserController extends AbstractController
     /**
      * @Route(" /profile/user", name="profile_user", methods={"GET", "POST"})
      */
-    public function profile(DemandsRepository $demandsRepository)
+    public function profile(DemandsRepository $demandsRepository, CalendarService $calendarService)
     {
 
             if (!$this->getUser()) return $this->redirectToRoute("app_login");

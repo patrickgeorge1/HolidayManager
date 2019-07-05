@@ -31,6 +31,8 @@
                                     Email </th>
                                 <th>
                                     Phone </th>
+                                <th>
+                                    Ability </th>
                                 <th> </th>
                                 <th> </th>
                             </tr>
@@ -46,6 +48,7 @@
                                     <td> {{ user.last_name }} </td>
                                     <td> {{ user.email }} </td>
                                     <td> {{ user.phone }} </td>
+                                    <td> {{ user.demandAbility|round }}% </td>
                                     <td>
                                         <a href="{{ path('formular_edit', {'id': user.id}) }}" class="btn btn-outline btn-circle btn-sm purple">
                                             <i class="fa fa-edit"></i> Edit </a>

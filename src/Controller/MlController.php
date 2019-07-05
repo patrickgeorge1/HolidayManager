@@ -6,6 +6,7 @@ use App\Entity\Demands;
 use App\Entity\User;
 use App\Repository\DemandsRepository;
 use App\Repository\UserRepository;
+use App\Service\CalendarService;
 use App\Service\MlService;
 use Doctrine\ORM\EntityManagerInterface;
 use Phpml\Regression\LeastSquares;
@@ -22,10 +23,12 @@ class MlController extends AbstractController
 
     private $demandsRepository;
     private $mlService;
-    public function __construct(DemandsRepository $demandsRepository, MlService $mlService)
+    public $calendarService;
+    public function __construct(DemandsRepository $demandsRepository, MlService $mlService, CalendarService $calendarService)
     {
         $this -> demandsRepository = $demandsRepository;
         $this->mlService =$mlService;
+        $this->calendarService = $calendarService;
     }
 
 
@@ -33,10 +36,9 @@ class MlController extends AbstractController
      * @Route("/blahhh")
      */
     public function blahhhh(MlService $mlService) {
-        $day = 1;
-        $free = 1;
-        return new Response($this -> mlService -> predictAjustment($day, $free));
 
+
+        return new Response($this->calendarService->curentDateIndex());
 
     }
 
