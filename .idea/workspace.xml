@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/MlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/CalendarService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CalendarService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/users/listAdmin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/listAdmin.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/users/listAdmin.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
+            <state relative-caret-position="418">
+              <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -359,21 +356,21 @@
       <workItem from="1561703906247" duration="45669000" />
       <workItem from="1562050291957" duration="48694000" />
       <workItem from="1562222703948" duration="41660000" />
-      <workItem from="1562324722010" duration="2599000" />
+      <workItem from="1562324722010" duration="2953000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224670000" />
+    <option name="totallyTimeSpent" value="225024000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14232409" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14232409" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.21703011" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.21703011" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.32606438" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -741,8 +738,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/users/listAdmin.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="50" column="72" selection-start-line="50" selection-start-column="72" selection-end-line="50" selection-end-column="72" />
+        <state relative-caret-position="418">
+          <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
         </state>
       </provider>
     </entry>

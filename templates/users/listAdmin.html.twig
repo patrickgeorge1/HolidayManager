@@ -48,7 +48,13 @@
                                     <td> {{ user.last_name }} </td>
                                     <td> {{ user.email }} </td>
                                     <td> {{ user.phone }} </td>
-                                    <td> {{ user.demandAbility|round }}% </td>
+
+                                    {% if user.demandAbility|round >= 70  %}
+                                        <td style="background-color: palevioletred"> {{ user.demandAbility|round }}% </td>
+                                    {% else %}
+                                        <td> {{ user.demandAbility|round }}% </td>
+                                    {% endif %}
+
                                     <td>
                                         <a href="{{ path('formular_edit', {'id': user.id}) }}" class="btn btn-outline btn-circle btn-sm purple">
                                             <i class="fa fa-edit"></i> Edit </a>
