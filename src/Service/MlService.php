@@ -39,19 +39,24 @@ class MlService
         for ($i = 1; $i <= 356; $i++) {
             $sum = $sum + $days_freq[$i];
         }
-        for ($i = 1; $i <= 356; $i++) {
-            $days_freq[$i] = $days_freq[$i] * 100 / $sum ;
-        }
 
-        $maximum = max($days_freq);
         $res = array();
-        array_push($res, (string)(round($maximum,2)).'%');
-        foreach ($demands as $demand) {
-            $date_number = $daysPerMonth[$demand->getDate()->format('m')] + intval($demand->getDate()->format('d'));
-            if ($days_freq[$date_number] == $maximum ) array_push($res, $demand->getDate()->format('d/m'));
-        }
+        if ($sum != 0) {
+            for ($i = 1; $i <= 356; $i++) {
+                $days_freq[$i] = $days_freq[$i] * 100 / $sum ;
+            }
 
-        $res =  array_unique($res);
+            $maximum = max($days_freq);
+
+            array_push($res, (string)(round($maximum,2)).'%');
+            foreach ($demands as $demand) {
+                $date_number = $daysPerMonth[$demand->getDate()->format('m')] + intval($demand->getDate()->format('d'));
+                if ($days_freq[$date_number] == $maximum ) array_push($res, $demand->getDate()->format('d/m'));
+            }
+
+            $res =  array_unique($res);
+        }
+        else array_push($res, "N/A");
         return $res;
     }
 
@@ -98,7 +103,7 @@ class MlService
         }
         else {
             array_push($res, 0);
-            array_push($res, "None");
+            array_push($res, "N/A");
         }
 
 
