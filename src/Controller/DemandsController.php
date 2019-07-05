@@ -198,24 +198,8 @@ class DemandsController extends AbstractController
                 return $this->redirectToRoute("profile_user");
             } catch (\Exception $e) {
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
+                return new Response($e->getMessage());
             }
         else return new Response("Ce cauta un user pe link de admin ?");
     }
-
-
-    /**
-     * @Route("/blah")
-     */
-    public function nothing(DemandsRepository $demandsRepository) {
-        $res = $demandsRepository->findOneBy(["id" => 1]);
-        //dd($res->getDate()->format('d M Y'));  // asa convertesc date time to string
-        $duration = 7;
-        dd(
-
-            date('Y-m-d', strtotime($res->getDate()->format('d M Y'). ' + '.$duration.' days'))
-
-        );
-
-    }
-
 }

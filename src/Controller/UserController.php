@@ -11,6 +11,7 @@ use App\Repository\EventsRepository;
 use App\Repository\UserRepository;
 use App\Service\CustomerProtectionService;
 use Doctrine\ORM\EntityManagerInterface;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,7 +79,7 @@ class UserController extends AbstractController
                     'text/plain'
                 );
             $mailer->send($message);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -91,7 +92,7 @@ class UserController extends AbstractController
     {
         try {
             return $this->render("main/messages.html.twig", array("user_display" => $this->getUser()->getFirstName(), 'profile' => $this->getUser()->getId(), 'person' => $this->getUser()));
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -194,7 +195,7 @@ class UserController extends AbstractController
                 'profile' => $this->getUser()->getId(),
                 'person' => $this->getUser()
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -267,16 +268,4 @@ class UserController extends AbstractController
 
 
     }
-
-
-    /**
-     * @Route("/modal", methods={"POST", "GET"})
-     */
-    public function modal(CustomerProtectionService $customerProtectionService, EventsRepository $eventsRepository) {
-        $event = $eventsRepository->findOneBy(['id' => 33]);
-//        return new Response(json_encode($customerProtectionService->isWeekend('2019-07-05')));
-        return new Response($customerProtectionService -> countFreeDays($event->getStart(), $event -> getEnd()));
-        //return new Response(json_encode($customerProtectionService->isweekend("07/06/2019")));
-    }
-
 }

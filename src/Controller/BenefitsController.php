@@ -64,7 +64,7 @@ class BenefitsController extends AbstractController
                 'addBenefit' => $form->createView()
 
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -90,7 +90,7 @@ class BenefitsController extends AbstractController
                 'profile' => $this->getUser()->getId(),
                 'person' => $this->getUser()
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
