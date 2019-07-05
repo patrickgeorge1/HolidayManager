@@ -9,6 +9,7 @@ use App\Repository\DemandsRepository;
 use App\Repository\EventsRepository;
 use App\Repository\UserRepository;
 use App\Service\CalendarService;
+use App\Service\CustomerProtectionService;
 use App\Service\MailService;
 use App\Service\MlService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,12 +24,14 @@ class DemandsController extends AbstractController
     private $entityManager;
     private $mailer;
     private $admins;
+    private $customerPreotectionService;
 
-    public function __construct(EntityManagerInterface $entityManager, MailService $mailer, UserRepository $userRepository)
+    public function __construct(EntityManagerInterface $entityManager, MailService $mailer, UserRepository $userRepository, CustomerProtectionService $customerProtectionService)
     {
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
         $this->admins = $userRepository->findUserByRole('ROLE_ADMIN');
+        $this->customerPreotectionService = $customerProtectionService;
     }
 
 
@@ -46,9 +49,11 @@ class DemandsController extends AbstractController
             // TODO note in calendar
             $start_date = $request->get("start_date");
             $end_date = $request->get("end_date");
+
+
             $duration = $this->date_diff($start_date, $end_date);
 
-            if ($this -> getUser() -> getFreeDays() - $duration < 0) return new Response("Not enough free days !");
+            if ($this -> getUser() -> getFreeDays() - $duration  < 0) return new Response("Not enough free days !");
             else {
                 /** @var User  $user */
                 $user = $this->getUser();
@@ -113,7 +118,7 @@ class DemandsController extends AbstractController
             $end = strtotime($end_date);; // or your date as well
             $start = strtotime($start_date);
             $datediff = $end - $start;
-            return round($datediff / (60 * 60 * 24)) + 1;
+            return  (ceil(abs($end - $start) / 86400) + 1) ;
         } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
@@ -148,7 +153,7 @@ class DemandsController extends AbstractController
 
 
 
-                        $demand->getEmployee()->setFreeDays($demand->getEmployee()->getFreeDays() - $demand->getDuration());
+                        $demand->getEmployee()->setFreeDays($demand->getEmployee()->getFreeDays() - $demand->getDuration() + $this->customerPreotectionService-> countFreeDays($demand->getDate(), \DateTime::createFromFormat('Y-m-d',$endDate)));
                         $this->entityManager->persist($demand);
                         $this->entityManager->flush();
                         return $this->redirectToRoute("profile_user");

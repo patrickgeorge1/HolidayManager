@@ -7,7 +7,9 @@ use App\Entity\User;
 use App\Form\EditUserType;
 use App\Form\RegistrationFormType;
 use App\Repository\DemandsRepository;
+use App\Repository\EventsRepository;
 use App\Repository\UserRepository;
+use App\Service\CustomerProtectionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -252,7 +254,7 @@ class UserController extends AbstractController
      */
     public function profile(DemandsRepository $demandsRepository)
     {
-        try {
+
             if (!$this->getUser()) return $this->redirectToRoute("app_login");
             $demands = $demandsRepository -> findBy(['status' => 1]);
             return $this->render("users/profile.html.twig", array(
@@ -262,9 +264,7 @@ class UserController extends AbstractController
                     'demands'=> $demands
                 )
             );
-        } catch (\Exception $e) {
-            return $this->redirectToRoute("app_login");
-        }
+
 
     }
 
@@ -272,9 +272,11 @@ class UserController extends AbstractController
     /**
      * @Route("/modal", methods={"POST", "GET"})
      */
-    public function modal(DemandsRepository $demandsRepository) {
-        $nr = $demandsRepository -> findAll();
-        return new Response("blah");
+    public function modal(CustomerProtectionService $customerProtectionService, EventsRepository $eventsRepository) {
+        $event = $eventsRepository->findOneBy(['id' => 33]);
+//        return new Response(json_encode($customerProtectionService->isWeekend('2019-07-05')));
+        return new Response($customerProtectionService -> countFreeDays($event->getStart(), $event -> getEnd()));
+        //return new Response(json_encode($customerProtectionService->isweekend("07/06/2019")));
     }
 
 }

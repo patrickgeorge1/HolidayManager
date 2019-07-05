@@ -79,20 +79,30 @@ class MlService
 
         $max = 0;
         $maxi = 0;
-        for ($i = 1; $i <= 12; $i++)
-        {
-            $months[$i] = $months[$i] * 100 / $sum;
-            if ($max < $months[$i]) {
-                $max = $months[$i];
-                $maxi = $i;
+
+
+        if ($sum != 0) {
+            for ($i = 1; $i <= 12; $i++)
+            {
+                $months[$i] = $months[$i] * 100 / $sum;
+                if ($max < $months[$i]) {
+                    $max = $months[$i];
+                    $maxi = $i;
+                }
+                //array_push($res, $months[$i]);
             }
-            //array_push($res, $months[$i]);
+
+            $monthPerNumberFinal = array(1 => "January", 2 => "February",3 => "March",4 => "April",5 => "May",6 => "June",7 => "July",8 => "August",9 => "September",10 => "October",11 => "November",12 => "December");
+            array_push($res, round($max,2));
+            array_push($res, $monthPerNumberFinal[$maxi]);
+        }
+        else {
+            array_push($res, 0);
+            array_push($res, "None");
         }
 
-        $monthPerNumberFinal = array(1 => "January", 2 => "February",3 => "March",4 => "April",5 => "May",6 => "June",7 => "July",8 => "August",9 => "September",10 => "October",11 => "November",12 => "December");
 
-        array_push($res, round($max,2));
-        array_push($res, $monthPerNumberFinal[$maxi]);
+
         return $res;
     }
 
