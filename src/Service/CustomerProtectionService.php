@@ -24,10 +24,26 @@ class CustomerProtectionService
         while ( $start != $end) {
             if($this ->isweekend($start) === true) $nr = $nr + 1;
             $start = date('m/d/Y', strtotime($start. ' + 1 days'));
+
         }
         if($this ->isweekend($start) === true) $nr = $nr + 1;
 
         return $nr;
+    }
+
+    function countDays(\DateTime $start, \DateTime $end) : int {
+        $start = date('m/d/Y', strtotime($start->format('d M Y')));
+        $end = date('m/d/Y', strtotime($end->format('d M Y')));
+
+        $nr = 0;
+        while ( $start != $end) {
+            $nr = $nr + 1;
+            $start = date('m/d/Y', strtotime($start. ' + 1 days'));
+
+        }
+        if($this ->isweekend($start) === true) $nr = $nr + 1;
+
+        return $nr+1;
     }
 
 }

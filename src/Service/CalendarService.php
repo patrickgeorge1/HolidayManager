@@ -57,4 +57,20 @@ class CalendarService
         return ($sum);
 
     }
+
+    public function getDateIndex(\DateTime $date) {
+        $months = array(1 => 31, 2 => 28, 3 => 31, 4 => 30, 5 => 31, 6 => 30, 7 => 31, 8 => 31, 9 => 30, 10 => 31, 11 => 30, 12 => 31 );
+
+        $month = intval(date('m', strtotime($date->format('Y-m-d'))));
+        $day = intval(date('d', strtotime($date->format('Y-m-d'))));
+
+
+        $sum = 0;
+        for ($i = 1; $i<= $month; $i++)
+        {
+            $sum = $sum + $months[$i];
+        }
+        $sum = $sum + $day;
+        return $sum;
+    }
 }
