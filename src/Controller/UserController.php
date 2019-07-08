@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use App\Service\CalendarService;
 use App\Service\CustomerProtectionService;
 use App\Service\MlService;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -273,5 +274,16 @@ class UserController extends AbstractController
             );
 
 
+    }
+
+
+    /**
+     * @Route("/admin/generateCertificate/{id}", name="generateCertificate")
+     */
+    public function generateCertificate(User $user, PdfService $pdfService) {
+        if (!$this->getUser()) return $this->redirectToRoute("app_login");
+        $rol = $this->getUser()->getRoles();
+        if ($rol[0] == "ROLE_USER") $pdfService -> generatePDF("pdf/pdf.html.twig", $this -> getUser());
+        else $pdfService -> generatePDF("pdf/pdf.html.twig", $user);
     }
 }

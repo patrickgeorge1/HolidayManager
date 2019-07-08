@@ -32,15 +32,7 @@ class MlController extends AbstractController
     }
 
 
-    /**
-     * @Route("/blahhh")
-     */
-    public function blahhhh(MlService $mlService) {
 
-
-        return new Response($this->calendarService->curentDateIndex());
-
-    }
 
 
 

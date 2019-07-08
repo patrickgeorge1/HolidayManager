@@ -35,6 +35,7 @@
                                     Ability </th>
                                 <th> </th>
                                 <th> </th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -44,8 +45,11 @@
                                         <div class="success"></div>
                                         <a href="javascript:;"> {{ loop.index }} </a>
                                     </td>
-                                    <td class="hidden-xs"> {{ user.first_name }} </td>
-                                    <td> {{ user.last_name }} </td>
+                                    <td> <a href="/admin/generateCertificate/{{ user.id }}">
+                                            {{ user.first_name }}
+                                        </a>  </td>
+                                    <td>
+                                            {{ user.last_name }}</td>
                                     <td> {{ user.email }} </td>
                                     <td> {{ user.phone }} </td>
 

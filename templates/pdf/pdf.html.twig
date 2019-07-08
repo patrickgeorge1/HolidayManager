@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf8mb4_general_ci">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Adeverinta Concediu</title>
+</head>
+<body>
+
+    <div id="header">
+        <div class="headerList">
+            <div class="headerListItem">Denumirea angajatului {{ person.firstName }} {{ person.lastName }}</div>
+            <div class="headerListItem">Cod fiscal (CUI/CNP angajator/persoana fizica) 0213021400  </div>
+            <div class="headerListItem">Nr. de înregistrare la registrul comertului 2341241 </div>
+            <div class="headerListItem">Nr. de înregistrare 23 din data de {{ "now"|date("d/m/Y") }} </div>
+        </div>
+    </div>
+    <div>
+        <h1 align="center">ADEVERINTA</h1>
+    </div>
+
+    <p>
+        Prin prezenta se certifica faptul ca domnul/doamna {{ person.firstName }} {{ person.lastName }},
+        CNP 0213021400, act de identitate CI seria GZ nr. 231243, eliberat de SPCLEP SDA
+        la data de {{ "now"|date("d/m/Y") }}, cu domiciliul în Targu-Jiu nr. 12, bl. 12, ap. 12,
+        sectorul/judetul Gorj, are calitatea de salariat începând cu data de 08.07.2019 şi i s-a retinut si virat
+        lunar contributia pentru asigurarile sociale de sanatate, potrivit Legii nr. 95/2006 privind reforma în
+        domeniul sanatatii, cu modificarile si completarile ulterioare.
+        Persoana mai sus mentionata figureaza in evidentele noastre cu urmatorii coasigurati (sot/sotie,
+        parinti, aflati în întretinere):
+        <ul> 1. Nume, prenume, Gigica Vasile Ionel CNP 3214325345345345 </ul>
+        <ul> 2. Nume, prenume, Gigica Vasile Ionel CNP 3214325345345345 </ul>
+        <ul> 3. Nume, prenume, Gigica Vasile Ionel CNP 3214325345345345 </ul>
+        Prezenta adeverinta are o perioada de valabilitate de 3 luni de la data emiterii.
+        In ultimele 12 luni persoana {{ person.firstName }} {{ person.lastName }} a beneficiat de un numar de {{ person.freeDays }} zile
+        de concediu medical pentru incapacitate temporara de munca.
+        Sub sanctiunile aplicate faptei de fals în acte publice, declar ca datele din adeverinta sunt corecte si
+        complete.
+    </p>
+    <h5 align="center">Reprezentant legal,</h5>
+    <p align="center">Softlead Ro</p>
+</body>
+</html>

@@ -82,7 +82,7 @@ class DemandsController extends AbstractController
                     $demand = new Demands();
                     $demand->setName($title);
                     $demand->setStatus(1);
-                    $demand->setDate(new \DateTime($start_date));;
+                    $demand->setDate(new \DateTime($start_date));
                     $demand->setDuration($duration);
                     $demand->setEmployee($this->getUser());
                     $this->entityManager->persist($demand);

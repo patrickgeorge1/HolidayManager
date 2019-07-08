@@ -21,14 +21,16 @@
                                                         </div>
                                                         <div class="kt-widget__content">
                                                                 <div class="kt-widget__head">
-                                                                        <a href="#" class="kt-widget__username">
+                                                                        <a href="/admin/generateCertificate/{{ person.id }}" class="kt-widget__username">
                                                                                 {{ person.firstName }} {{ person.lastName }}
                                                                                 {% if person.roles[0] == "ROLE_ADMIN" %}
                                                                                         <i class="flaticon2-correct"></i>
                                                                                 {% else %}
                                                                                         <i class="flaticon-avatar"></i>
                                                                                 {% endif %}
-                                                                        </a>
+
+                                                                        </a>     &nbsp;&nbsp;&nbsp;<h5> <a href="/admin/generateCertificate/{{ person.id }}">CERTIFICATE <i class="flaticon-psd"></i> </a> </h5>
+
 
                                                                         <div class="kt-widget__action">
 
