@@ -30,12 +30,6 @@ class BenefitsController extends AbstractController
      */
     public function adminListBenefits(Request $request)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e user il trimit pe ruta lui
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("benefits_user_list");
-
-
         try {
             $benefits = $this -> benefitsRepository -> findAll();
 
@@ -76,11 +70,6 @@ class BenefitsController extends AbstractController
      */
     public function listBenefits(Request $request)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e admin il trimit pe ruta lui
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("benefits_admin_list");
-
 
         try {
             $benefits = $this -> getUser() -> getBenefits();
@@ -101,12 +90,6 @@ class BenefitsController extends AbstractController
      */
     public function giveBenefits(Request $request)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e admin il trimit pe ruta lui
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("benefits_user_list");
-
-
 
         try {
             $form = $this->createForm(GiveBenefitType::class);
@@ -134,7 +117,7 @@ class BenefitsController extends AbstractController
                 'profile' => $this->getUser()->getId(),
                 'person' => $this->getUser()
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }

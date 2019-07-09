@@ -5,8 +5,11 @@
 &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;
 &nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;
 
-
-<div class="kt-header__topbar-item kt-header__topbar-item--user" onclick="location.href='{% if profile is defined %} /profile/user/ {% else %} /login {% endif %}'">
+{% set prof = "/profile/user" %}
+{% if person.roles[0] == "ROLE_ADMIN" %}
+    {% set prof = "/profile/user" %}
+{% endif %}
+<div class="kt-header__topbar-item kt-header__topbar-item--user" onclick="location.href='{% if profile is defined %} {{ prof }} {% else %} /login {% endif %}'">
     <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
         <div class="kt-header__topbar-user">
             <span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span> <span class="kt-header__topbar-username kt-hidden-mobile">

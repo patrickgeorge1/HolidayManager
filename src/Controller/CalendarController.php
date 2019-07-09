@@ -23,7 +23,6 @@ class CalendarController extends AbstractController
         $rol = $this->getUser()->getRoles();
         if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("calendar_admin");
 
-
         return $this->render('calendar/calendarAdmin.html.twig', [
             'user_display' => $this->getUser()->getFirstName(),
             'profile' => $this->getUser()->getId(),
@@ -56,7 +55,6 @@ class CalendarController extends AbstractController
     public function tool(EventsRepository $eventsRepository)
     {
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
-
 
         $info = $eventsRepository->findAll();
         $data = array();

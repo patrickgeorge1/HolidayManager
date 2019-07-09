@@ -86,7 +86,7 @@ class UserController extends AbstractController
                 'profile' => $this->getUser()->getId(),
                 'person' => $this->getUser()
             ]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -138,11 +138,6 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e admin il duc pe ruta lui
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("admin_list");
-
         // extrag info din db
         try {
             $all = $userRepository->findAll();
@@ -168,11 +163,6 @@ class UserController extends AbstractController
      */
     public function deleteAdmin(UserRepository $userRepository, User $user)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // ruta cu privilegii
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
-
         // extrag info din db
         try {
             $this->entityManager->remove($user);
@@ -190,11 +180,6 @@ class UserController extends AbstractController
      */
     public function editUser(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // ruta cu privilegii
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
-
 
         try {
             // creez forma pe baza clasei, USER o sa fie entitatea din tabela coresp referintei $id
@@ -241,11 +226,6 @@ class UserController extends AbstractController
      */
     public function listAdmin(UserRepository $userRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder, MlService $mlService, CalendarService $calendarService)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e user il trimit pe ruta lui
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") return $this->redirectToRoute("user_list");
-
         try {
             // extrag info din db
 
@@ -290,12 +270,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route(" /profile/user", name="profile_user", methods={"GET", "POST"})
+     * @Route("/profile/user", name="profile_user", methods={"GET", "POST"})
      */
     public function profile(DemandsRepository $demandsRepository, CalendarService $calendarService)
     {
 
-            if (!$this->getUser()) return $this->redirectToRoute("app_login");
             $demands = $demandsRepository -> findBy(['status' => 1]);
             return $this->render("users/profile.html.twig", array(
                     "user_display" => $this->getUser()->getFirstName(),
@@ -304,18 +283,20 @@ class UserController extends AbstractController
                     'demands'=> $demands
                 )
             );
-
-
     }
 
 
     /**
-     * @Route("/admin/generateCertificate/{id}", name="generateCertificate")
+     * @Route("/user/generateCertificate", name="generateCertificateUser")
+     */
+    public function generateCertificateUser(PdfService $pdfService) {
+         $pdfService -> generatePDF("pdf/pdf.html.twig", $this->getUser());
+    }
+
+    /**
+     * @Route("/admin/generateCertificate/{id}", name="generateCertificateAdmin")
      */
     public function generateCertificate(User $user, PdfService $pdfService) {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_USER") $pdfService -> generatePDF("pdf/pdf.html.twig", $this -> getUser());
-        else $pdfService -> generatePDF("pdf/pdf.html.twig", $user);
+        $pdfService -> generatePDF("pdf/pdf.html.twig", $user);
     }
 }

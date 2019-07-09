@@ -7,6 +7,7 @@ use App\Form\AddMessageType;
 use App\Form\EditMessageType;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use mysql_xdevapi\Exception;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +30,6 @@ class MessagesController extends AbstractController
      */
     public function messages()
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca un admin incearca sa intre pe user
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_ADMIN") return $this->redirectToRoute("messages_admin");
 
         try {
             // randez twig de user
@@ -50,7 +47,7 @@ class MessagesController extends AbstractController
 
 
             return $this->render('messages/display.html.twig', $mesaj);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirectToRoute("app_login");
         }
     }
@@ -61,10 +58,6 @@ class MessagesController extends AbstractController
      */
     public function messagesAdmin()
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
         try {
             // randez twig de admin
@@ -93,10 +86,7 @@ class MessagesController extends AbstractController
      */
     public function addMessage(Request $request)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+
         try {
             $form = $this->createForm(AddMessageType::class);
             $form->handleRequest($request);
@@ -127,8 +117,7 @@ class MessagesController extends AbstractController
      */
     public function updateMessage(Messages $message, MessagesRepository $messagesRepository, Request $request)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
+
         try {
             // iau prin {id} obj de tip message si l dau in create form ca param ca sa interpreteze ca edit form
             $form = $this->createForm(EditMessageType::class,$message);
@@ -156,10 +145,6 @@ class MessagesController extends AbstractController
      * @Route("/admin/messages/update/{id}/post", name="messages_admin_update_post", methods={"POST", "GET"})
      */
     public function updatePost (Request $request, MessagesRepository $messagesRepository, $id) {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
 
         // update la mesaj
         $title = $request->get("title");
@@ -182,10 +167,6 @@ class MessagesController extends AbstractController
      */
     public function deleteMessage($id, MessagesRepository $messagesRepository)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca incearca un user sa intre pe admin
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] != "ROLE_ADMIN") return $this->redirectToRoute("messages");
         try {
             $now = $messagesRepository->findOneBy(["id" => $id]);
             $this -> entityManager -> remove($now);

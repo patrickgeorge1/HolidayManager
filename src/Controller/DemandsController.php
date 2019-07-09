@@ -40,8 +40,6 @@ class DemandsController extends AbstractController
      */
     public function request(Request $request, CalendarService $calendarService)
     {
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        // daca e admin il trimit pe ruta lui
         $rol = $this->getUser()->getRoles();
 
         if ($rol[0] == "ROLE_ADMIN")
@@ -130,11 +128,6 @@ class DemandsController extends AbstractController
     public function accept_demand(Demands $demand, CalendarService $calendarService, Request $request)
     {
 
-            // vad daca e logat
-            if (!$this->getUser()) return $this->redirectToRoute("app_login");
-            $rol = $this->getUser()->getRoles();
-            if ($rol[0] == "ROLE_ADMIN")
-            {
 
                     if ($demand->getEmployee()->getFreeDays() - $demand->getDuration() >= 0)
                     {
@@ -159,8 +152,7 @@ class DemandsController extends AbstractController
                         return $this->redirectToRoute("profile_user");
                     }
                     else return new Response("Baiatul si depasit zilele intre timp");
-            }
-            else return new Response("Ce cauta un user pe link de admin ?");
+
 
 
     }
@@ -180,10 +172,7 @@ class DemandsController extends AbstractController
      */
     public function decline_demand(Demands $demand, CalendarService $calendarService, Request $request)
     {
-        // vad daca e logat
-        if (!$this->getUser()) return $this->redirectToRoute("app_login");
-        $rol = $this->getUser()->getRoles();
-        if ($rol[0] == "ROLE_ADMIN")
+
             try {
                 $demand->setStatus(0);
 
@@ -200,6 +189,6 @@ class DemandsController extends AbstractController
                 echo 'Caught exception: ',  $e->getMessage(), "\n";
                 return new Response($e->getMessage());
             }
-        else return new Response("Ce cauta un user pe link de admin ?");
+
     }
 }

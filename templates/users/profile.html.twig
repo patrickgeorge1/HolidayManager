@@ -19,17 +19,37 @@
                                                         <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
                                                                 JM
                                                         </div>
+
+                                                        {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                {% set cer = "/admin/generateCertificate/" %}
+                                                        {% endif %}
                                                         <div class="kt-widget__content">
                                                                 <div class="kt-widget__head">
-                                                                        <a href="/admin/generateCertificate/{{ person.id }}" class="kt-widget__username">
-                                                                                {{ person.firstName }} {{ person.lastName }}
-                                                                                {% if person.roles[0] == "ROLE_ADMIN" %}
-                                                                                        <i class="flaticon2-correct"></i>
-                                                                                {% else %}
-                                                                                        <i class="flaticon-avatar"></i>
-                                                                                {% endif %}
+                                                                        {% set cer = "/user/generateCertificate" %}
+                                                                        {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                                       <a href="/admin/generateCertificate/{{ person.id }}" class="kt-widget__username">
+                                                                        {% else %}
+                                                                                       <a href="{{ cer }}" class="kt-widget__username">
+                                                                        {% endif %}
 
-                                                                        </a>     &nbsp;&nbsp;&nbsp;<h5> <a href="/admin/generateCertificate/{{ person.id }}">CERTIFICATE <i class="flaticon-psd"></i> </a> </h5>
+
+
+
+
+                                                                                                {{ person.firstName }} {{ person.lastName }}
+                                                                                                {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                                                        <i class="flaticon2-correct"></i>
+                                                                                                {% else %}
+                                                                                                        <i class="flaticon-avatar"></i>
+                                                                                                {% endif %}
+
+                                                                                        </a>&nbsp;&nbsp;&nbsp;<h5>
+                                                                                                       {% if person.roles[0] == "ROLE_ADMIN" %}
+                                                                                                                       <a href="/admin/generateCertificate/{{ person.id }}">
+                                                                                                       {% else %}
+                                                                                                                               <a href="{{ cer }}">
+                                                                                                       {% endif %}
+                                                                                                                               CERTIFICATE <i class="flaticon-psd"></i> </a> </h5>
 
 
                                                                         <div class="kt-widget__action">
