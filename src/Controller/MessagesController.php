@@ -8,6 +8,7 @@ use App\Form\EditMessageType;
 use App\Repository\MessagesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use mysql_xdevapi\Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -164,11 +165,12 @@ class MessagesController extends AbstractController
 
     /**
      * @Route("/admin/messages/delete/{id}", name="messages_admin_delete", methods={"GET", "POST"})
+     * @IsGranted("PROPRIETAR", subject="message")
      */
-    public function deleteMessage($id, MessagesRepository $messagesRepository)
+    public function deleteMessage(Messages $message, MessagesRepository $messagesRepository)
     {
         try {
-            $now = $messagesRepository->findOneBy(["id" => $id]);
+            $now = $message;
             $this -> entityManager -> remove($now);
             $this -> entityManager -> flush();
             return $this->redirectToRoute("messages_admin");

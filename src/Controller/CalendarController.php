@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Events;
 use App\Repository\EventsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ class CalendarController extends AbstractController
      */
     public function calendar()
     {
+
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
         // ruta cu privilegii
         $rol = $this->getUser()->getRoles();
@@ -33,6 +35,7 @@ class CalendarController extends AbstractController
 
     /**
      * @Route("/calendarAdmin", name="calendar_admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function calendarAdmin()
     {
