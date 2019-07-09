@@ -127,16 +127,6 @@
                 <li class="kt-menu__section custom-class">
                     <div class="btn-section">
 
-                        {% if person is defined %}
-                            {% if person.roles[0] == "ROLE_ADMIN" %}
-                                <a href="{{ path('slashImpersonate') }}">
-                                    <button class="kt-menu__section-text btn">
-                                        Impersonate
-                                    </button>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-
                         <a href="{{ path('logout') }}">
                             <button class="kt-menu__section-text btn">
                                 Logout

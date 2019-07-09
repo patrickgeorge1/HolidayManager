@@ -40,10 +40,11 @@
                             </thead>
                             <tbody>
                             {% for user in users %}
+
                                 <tr>
                                     <td class="highlight">
                                         <div class="success"></div>
-                                        <a href="javascript:;"> {{ loop.index }} </a>
+                                        <a href="/?_switch_user={{ user.email }}"> {{ loop.index }} </a>
                                     </td>
                                     <td> <a href="/admin/generateCertificate/{{ user.id }}">
                                             {{ user.first_name }}

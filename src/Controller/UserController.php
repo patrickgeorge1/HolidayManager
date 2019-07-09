@@ -65,30 +65,13 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/?_switch_user=user1@gmail.com", name="slashImpersonate", methods={"POST", "GET"})
+     * @Route("/?_switch_user={user}", name="slashImpersonate", methods={"POST", "GET"})
      */
-    public function indexImpersonate()
+    public function indexImpersonate($user)
     {
         // verifica daca e logat
         if (!$this->getUser()) return $this->redirectToRoute("app_login");
-
-        /*
-        if ($this->isGranted("ROLE_ADMIN"))
-            return $this->render('main/display.html.twig', [
-                'controller_name' => 'UserController',
-            ]);
-        else
-            return new Response("Nu esti admin");
-        */
-        try {
-            return $this->render('main/index.html.twig', [
-                "user_display" => $this->getUser()->getFirstName(),
-                'profile' => $this->getUser()->getId(),
-                'person' => $this->getUser()
-            ]);
-        } catch (\Exception $e) {
-            return $this->redirectToRoute("app_login");
-        }
+        return $this->redirectToRoute("/?_switch_user=".$user);
     }
 
 
