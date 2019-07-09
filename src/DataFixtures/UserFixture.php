@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Factory;
 use Symfony\Component\Form\FormRegistry;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -47,10 +48,13 @@ class UserFixture extends Fixture
     {
         for ($i = 0; $i <= 10; $i++) {
             $user = new User();
-            $user->setEmail("user".$i."@gmail.com");
             $user->setRoles("ROLE_USER");
-            $user->setFirstName("user_first".$i.mt_rand(7, 33));
-            $user->setLastName("user_last".$i.mt_rand(33, 77));
+            $faker = Factory::create();
+            $somt = $faker->name;
+            $words = explode(" ", $somt);
+            $user->setEmail($words[0].'.'.$words[1]."@gmail.com");
+            $user->setFirstName($words[0]);
+            $user->setLastName($words[1]);
             $user->setPhone("+407".$this->number());
             $user->setPassword(
                 $this -> passwordEncoder->encodePassword(

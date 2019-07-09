@@ -3,10 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Benefits;
+use App\Entity\Messages;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Faker\Factory;
 
 class BenefitsFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -28,9 +30,11 @@ class BenefitsFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i = 1; $i <= 10; $i++) {
+            $faker = Factory::create();
+
             $benefit = new Benefits();
-            $benefit->setName("benefit".$i);
-            $benefit->setDescription($this -> generateRandomString(4)." ".$this -> generateRandomString(3)." ".$this -> generateRandomString(10)." ");
+            $benefit->setName($faker->title);
+            $benefit->setDescription($faker->text(50));
             $benefit->addUser($this->getReference(UserFixture::USER_REFERENCE.mt_rand(0,10)));
             $benefit->addUser($this->getReference(UserFixture::USER_REFERENCE.mt_rand(0,10)));
 
