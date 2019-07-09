@@ -15,8 +15,8 @@ class TestingController extends AbstractController
     /**
      * @Route("/test")
      */
-    public function test(PdfService $pdfService) {
-            $pdfService -> generatePDF("pdf/pdf.html.twig", $this->getUser());
+    public function test() {
+            return $this->render("ml/graph.html.twig");
     }
 
 }

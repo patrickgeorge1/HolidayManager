@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/ml/checkAvailability.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/ml/displayAvailability.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/ml/graph.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/CalendarService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CalendarService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/CustomerProtectionService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/CustomerProtectionService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TestingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TestingController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
+            <state relative-caret-position="213">
               <caret line="82" column="62" selection-start-line="82" selection-start-column="62" selection-end-line="82" selection-end-column="62" />
               <folding>
                 <element signature="e#34#57#0#PHP" expanded="true" />
@@ -39,20 +35,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/ml/displayAvailability.html.twig">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/TestingController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+            <state relative-caret-position="396">
+              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+              <folding>
+                <element signature="e#34#61#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Service/CustomerProtectionService.php">
+        <entry file="file://$PROJECT_DIR$/templates/ml/graph.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+            <state relative-caret-position="313">
+              <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,11 +71,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>req</find>
-      <find>+</find>
-      <find>calendar</find>
-      <find>TODO</find>
-      <find>MainController.php</find>
       <find>TOD</find>
       <find>kt-separator kt-separator--space-sm  kt-separator--border-dashed</find>
       <find>ro</find>
@@ -99,6 +96,11 @@
       <find>requests</find>
       <find>October</find>
       <find>strtotime</find>
+      <find>css</find>
+      <find>min</find>
+      <find>chart''''''</find>
+      <find>&lt;script</find>
+      <find>my f</find>
     </findStrings>
     <dirStrings>
       <dir>C:\laragon\www\Holiday_Manager\src\Repository</dir>
@@ -113,7 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/emails/declined.html.twig" />
         <option value="$PROJECT_DIR$/src/Service/MailService.php" />
         <option value="$PROJECT_DIR$/templates/emails/requestInfoAdmin.html.twig" />
         <option value="$PROJECT_DIR$/templates/emails/requestInfoUser.html.twig" />
@@ -144,7 +145,6 @@
         <option value="$PROJECT_DIR$/src/Kernel.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Service/PdfService.php" />
-        <option value="$PROJECT_DIR$/src/Controller/TestingController.php" />
         <option value="$PROJECT_DIR$/templates/pdf/pdf.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/templates/users/listAdmin.html.twig" />
@@ -164,6 +164,8 @@
         <option value="$PROJECT_DIR$/src/Service/CustomerProtectionService.php" />
         <option value="$PROJECT_DIR$/src/Controller/MlController.php" />
         <option value="$PROJECT_DIR$/templates/ml/displayAvailability.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/TestingController.php" />
+        <option value="$PROJECT_DIR$/templates/ml/graph.html.twig" />
       </list>
     </option>
   </component>
@@ -262,10 +264,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1627" />
+    <option name="x" value="-1276" />
     <option name="y" value="-9" />
-    <option name="width" value="848" />
-    <option name="height" value="557" />
+    <option name="width" value="678" />
+    <option name="height" value="446" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -294,37 +296,13 @@
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Form" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="messages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="ml" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -381,21 +359,21 @@
       <workItem from="1561703906247" duration="45669000" />
       <workItem from="1562050291957" duration="48694000" />
       <workItem from="1562222703948" duration="41660000" />
-      <workItem from="1562324722010" duration="29508000" />
+      <workItem from="1562324722010" duration="32502000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251579000" />
+    <option name="totallyTimeSpent" value="254573000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14232409" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17919463" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.21599169" />
+      <window_info anchor="bottom" id="Terminal" order="0" sideWeight="0.49946696" visible="true" weight="0.27882037" />
       <window_info anchor="bottom" id="Database Changes" order="1" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50053304" side_tool="true" weight="0.32606438" />
       <window_info anchor="bottom" id="Version Control" order="3" />
@@ -417,14 +395,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/results.json" />
-    <entry file="file://$PROJECT_DIR$/vendor/php-ai/php-ml/src/Regression/LeastSquares.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.lock">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-836">
@@ -557,16 +527,6 @@
             <element signature="e#2143#2149#0#HTML" expanded="true" />
             <element signature="e#2148#2154#0#HTML" expanded="true" />
             <element signature="e#2154#2160#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/TestingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding>
-            <element signature="e#34#61#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -787,20 +747,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="82" column="62" selection-start-line="82" selection-start-column="62" selection-end-line="82" selection-end-column="62" />
-          <folding>
-            <element signature="e#34#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/ml/displayAvailability.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
           <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ml/graph.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/TestingController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
+          <folding>
+            <element signature="e#34#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CalendarController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/MlController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="82" column="62" selection-start-line="82" selection-start-column="62" selection-end-line="82" selection-end-column="62" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
