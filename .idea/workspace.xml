@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f10c877-a478-4809-afe2-148173273cf0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,11 +31,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="312">
               <caret line="59" column="145" selection-start-line="59" selection-start-column="145" selection-end-line="59" selection-end-column="145" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="67" column="70" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="70" />
+              <folding>
+                <element signature="e#34#58#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/partials/_aside-menu.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="111" column="66" selection-start-line="111" selection-start-column="66" selection-end-line="111" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -127,7 +148,6 @@
         <option value="$PROJECT_DIR$/templates/pdf/pdf.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/templates/users/listAdmin.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/templates/users/profile.html.twig" />
         <option value="$PROJECT_DIR$/src/DataFixtures/UserFixture.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/BenefitsFixtures.php" />
@@ -135,7 +155,6 @@
         <option value="$PROJECT_DIR$/src/DataFixtures/DemandsFixtures.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/EventsFixture.php" />
         <option value="$PROJECT_DIR$/src/DataFixtures/MessagesFixtures.php" />
-        <option value="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" />
         <option value="$PROJECT_DIR$/templates/ml/checkAvailability.html.twig.html" />
         <option value="$PROJECT_DIR$/src/Form/checkAvailabilityType.php" />
         <option value="$PROJECT_DIR$/templates/ml/checkAvailability.html.twig" />
@@ -147,6 +166,8 @@
         <option value="$PROJECT_DIR$/templates/ml/graph.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/templates/partials/_aside-menu.html.twig" />
       </list>
     </option>
   </component>
@@ -266,17 +287,6 @@
             <path>
               <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -284,17 +294,6 @@
               <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Holiday_Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Holiday_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="ml" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -351,12 +350,12 @@
       <workItem from="1561703906247" duration="45669000" />
       <workItem from="1562050291957" duration="48694000" />
       <workItem from="1562222703948" duration="41660000" />
-      <workItem from="1562324722010" duration="33572000" />
+      <workItem from="1562324722010" duration="34103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255643000" />
+    <option name="totallyTimeSpent" value="256174000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
@@ -618,13 +617,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/partials/_aside-menu.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="90" column="57" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/users/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-613">
@@ -676,16 +668,6 @@
           <caret line="117" column="172" selection-start-line="117" selection-start-column="172" selection-end-line="117" selection-end-column="172" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="231" column="102" selection-start-line="231" selection-start-column="39" selection-end-line="231" selection-end-column="102" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -776,6 +758,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="59" column="145" selection-start-line="59" selection-start-column="145" selection-end-line="59" selection-end-column="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="67" column="70" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="70" />
+          <folding>
+            <element signature="e#34#58#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/partials/_aside-menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="111" column="66" selection-start-line="111" selection-start-column="66" selection-end-line="111" selection-end-column="66" />
         </state>
       </provider>
     </entry>
