@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\CalendarService;
 use App\Service\CustomerProtectionService;
+use App\Service\MailService;
 use App\Service\MlService;
 use App\Service\PdfService;
+use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,13 +26,15 @@ class TestingController extends AbstractController
     private $customerProtectionService;
     private $calendarService;
     private $mlService;
+    private $mailService;
 
-    public function __construct(UserRepository $userRepository, CustomerProtectionService $customerProtectionService, CalendarService $calendarService, MlService $mlService)
+    public function __construct(UserRepository $userRepository, CustomerProtectionService $customerProtectionService, MailService $mailService , CalendarService $calendarService, MlService $mlService)
     {
         $this -> userRepository = $userRepository;
         $this -> customerProtectionService = $customerProtectionService;
         $this -> calendarService = $calendarService;
         $this -> mlService = $mlService;
+        $this -> mailService = $mailService;
     }
 
     /**
@@ -71,6 +77,60 @@ class TestingController extends AbstractController
         }
         $data = array("persons" => $persons, "mean" => $mean);
         return $data;
+    }
+
+
+
+
+
+    /**
+     * @Route("/requestRemainingDays/{id}")
+     * @IsGranted("ENDYEAR", subject="user")
+     */
+    public function requestRemainingDays(User $user, Request $request) {
+        $title = "Extra payment";
+        $twigPath = "emails/askPayRemainingDays.html.twig";
+        $twigParam = array('base_href' => $request->getSchemeAndHttpHost().'/', 'person' => $user);
+        $this->mailService->mail(array($user -> getEmail()), $title, $twigPath, $twigParam);
+        return $this->redirectToRoute("slash");
+    }
+
+
+
+    /**
+     * @Route("/requestRemainingDays/{id}/pay")
+     * @IsGranted("ENDYEAR", subject="user")
+     */
+    public function requestRemainingDaysPay(User $user, Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager) {
+        $admins = $userRepository->findUserByRole('ROLE_ADMIN');
+
+        foreach ($admins as $admin) {
+            $title = "Restanta de plata";
+            $twigPath = "emails/askPayRemainingDaysAdminPay.html.twig";
+            $twigParam = array('base_href' => $request->getSchemeAndHttpHost().'/', 'person' => $user);
+            $this->mailService->mail(array($admin -> getEmail()), $title, $twigPath, $twigParam);
+        }
+        $user->setFreeDays(0);
+        $entityManager->persist($user);
+        $entityManager->flush();
+        return $this->redirectToRoute("slash");
+    }
+
+
+
+    /**
+     * @Route("/requestRemainingDays/{id}/keep")
+     * @IsGranted("ENDYEAR", subject="user")
+     */
+    public function requestRemainingDaysKeep(User $user, Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager) {
+        $admins = $userRepository->findUserByRole('ROLE_ADMIN');
+        foreach ($admins as $admin) {
+            $title = "Restanta de zile";
+            $twigPath = "emails/askPayRemainingDaysAdminKeep.html.twig";
+            $twigParam = array('base_href' => $request->getSchemeAndHttpHost().'/', 'person' => $user);
+            $this->mailService->mail(array($admin -> getEmail()), $title, $twigPath, $twigParam);
+        }
+        return $this->redirectToRoute("slash");
     }
 
 }
