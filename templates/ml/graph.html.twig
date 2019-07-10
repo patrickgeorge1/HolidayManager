@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>title</title>
+    <title>Softlead</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" type="text/css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
@@ -45,14 +45,15 @@
 
         $.ajax({
             type: 'POST',
-            url: "/admin/test",
-            data: { start: startDate, stop: endDate },
+            url: "/admin/test/json",
+            data: {"start":startDate, "stop":endDate},
             success: function (data) {
-                dataParsed = JSON.parse(data);
+                console.log(data);
+                dataParsed = data;
             },
             async:false
         });
-        console.log(dataParsed);
+
 
         var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 

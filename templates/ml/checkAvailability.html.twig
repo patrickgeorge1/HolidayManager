@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MessagesController!{% endblock %}
+{% block title %}Softlead{% endblock %}
 
 {% block body %}
 
@@ -24,19 +24,16 @@
                     <div class="kt-portlet__body">
 
 
-                        <form class="portlet-body form custom-form" action="/admin/test">
+                        <form class="portlet-body form custom-form" id="idForma">
                             Start <br>
-                            <input type="date" class="form-control" name="start"><br><br>
+                            <input type="date" class="form-control" name="start" id="startDate"><br><br>
                             End <br>
-                            <input type="date" class="form-control" name="stop"><br>
-                            <button class="btn btn-primary" type="submit">
+                            <input type="date" class="form-control" name="stop" id="endDate"><br>
+                            <button class="btn btn-primary" type="button">
                                 <span class="spinner-grow spinner-grow-sm"></span>
                                 check
                             </button>
-
                         </form>
-
-
 
                     </div>
 
@@ -45,6 +42,23 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block jsScripts %}
+    {{ parent() }}
+
+    <script>
+
+        $( document ).ready(function() {
+            $( "#idForma" ).click(function( event ) {
+                        var startDate = document.getElementById('startDate').value;
+                        var endDate = document.getElementById('endDate').value;
+                        location.href = "/admin/test/"+ startDate + "/"+endDate;
+                    }
+                );
+        });
+
+    </script>
 {% endblock %}
 
 

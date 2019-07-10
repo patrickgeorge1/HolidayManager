@@ -32,18 +32,20 @@ class TestingController extends AbstractController
     }
 
     /**
-     * @Route("/admin/test")
+     * @Route("/admin/test/json", methods={"POST"})
      */
-    public function test(Request $request) {
-
+    public function testGenerate(Request $request) {
         $start = $request->get("start");
-        $end   = $request->get("stop");
-        if ($request->isMethod('get')) {
-            return $this->render("ml/graph.html.twig", array("start" => $start, "end" => $end));
-        }
-        else {
-            return new JsonResponse($this->parseAvailabilityData($start , $end, $this->userRepository, $this->customerProtectionService, $this -> calendarService, $this -> mlService));
-        }
+        $end = $request->get("stop");
+        return new JsonResponse($this->parseAvailabilityData($start , $end, $this->userRepository, $this->customerProtectionService, $this -> calendarService, $this -> mlService));
+    }
+
+
+    /**
+     * @Route("/admin/test/{start}/{end}", defaults={"start"="2000-12-03", "end"="2000-12-03"})
+     */
+    public function test($start, $end) {
+        return $this->render("ml/graph.html.twig", array("start" => $start, "end" => $end));
     }
 
     public function parseAvailabilityData(string $start, string $end, UserRepository $userRepository, CustomerProtectionService $customerProtectionService, CalendarService $calendarService, MlService $mlService) {
@@ -68,7 +70,7 @@ class TestingController extends AbstractController
             array_push($mean, round($mean_sum));
         }
         $data = array("persons" => $persons, "mean" => $mean);
-        return json_encode($data);
+        return $data;
     }
 
 }
