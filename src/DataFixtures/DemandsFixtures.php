@@ -13,10 +13,11 @@ class DemandsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
         for ($i = 0; $i <= 10; $i++) {
-            $faker = Factory::create();
+
             $demand = new Demands();
-            $demand->setName($faker->title);
+            $demand->setName($faker->word);
             $demand->setDuration($faker->numberBetween(1, 5));
             $demand->setStatus(1);
             $demand->setDate(new \DateTime());

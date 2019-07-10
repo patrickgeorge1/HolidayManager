@@ -46,10 +46,11 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
         for ($i = 0; $i <= 10; $i++) {
             $user = new User();
             $user->setRoles("ROLE_USER");
-            $faker = Factory::create();
+
             $somt = $faker->name;
             $words = explode(" ", $somt);
             $user->setEmail($words[0].'.'.$words[1]."@gmail.com");

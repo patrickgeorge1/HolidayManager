@@ -12,11 +12,11 @@ class MessagesFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-
+        $faker = Factory::create();
         for ($i = 1; $i <= 4; $i ++) {
-            $faker = Factory::create();
+
             $message = new Messages();
-            $message->setTitle($faker->title);
+            $message->setTitle($faker->word);
             $message->setBody($faker->jobTitle);
             $message->setAdmin($this->getReference(UserFixture::USER_REFERENCE.mt_rand(1, 4)));
             $manager->persist($message);

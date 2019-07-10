@@ -29,11 +29,12 @@ class BenefitsFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
         for ($i = 1; $i <= 10; $i++) {
-            $faker = Factory::create();
+
 
             $benefit = new Benefits();
-            $benefit->setName($faker->title);
+            $benefit->setName($faker->word);
             $benefit->setDescription($faker->text(50));
             $benefit->addUser($this->getReference(UserFixture::USER_REFERENCE.mt_rand(0,10)));
             $benefit->addUser($this->getReference(UserFixture::USER_REFERENCE.mt_rand(0,10)));

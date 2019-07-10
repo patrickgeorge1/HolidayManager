@@ -14,10 +14,11 @@ class EventsFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
         for ($i = 0; $i <= 10; $i ++) {
-            $faker = Factory::create();
+
             $event = new Events();
-            $event->setTitle($faker->title);
+            $event->setTitle($faker->word);
             $event->setStart(new \DateTime());
             $event->setEnd(new \DateTime());
             $manager->persist($event);
