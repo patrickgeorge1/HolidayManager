@@ -79,8 +79,7 @@ class MlController extends AbstractController
             $item["mean"] = $mean_sum;
             array_push($mean, $item);
         }
-
-        return $this->render("ml/displayAvailability.html.twig", array("results" => $mean));
+        return $this->render("ml/graph.html.twig", array("results" => $mean));
     }
 
 

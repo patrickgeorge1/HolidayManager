@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" type="text/css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" type="text/javascript"></script>
     <script src="https://www.chartjs.org/samples/latest/utils.js" type="text/javascript"></script>
 </head>
@@ -13,12 +16,43 @@
 
 
 
-    <div style="width:75%;">
-        <canvas id="canvas"></canvas>
-    </div>
+        <div style="width:75%;">
+            <canvas id="canvas"></canvas>
+        </div>
 
-    <script>
 
+
+
+
+
+
+
+    <input type="text" id="startDate" value="{{ start }}" style="display: none;">
+    <input type="text" id="endDate" value="{{ end }}" style="display: none;">
+
+    <script type="text/javascript">
+
+
+
+
+        var startDate = document.getElementById('startDate').value;
+        var endDate = document.getElementById('endDate').value;
+        // console.log(startDate);
+        // console.log(endDate);
+
+        var dataParsed ;
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/admin/test",
+            data: { start: startDate, stop: endDate },
+            success: function (data) {
+                dataParsed = JSON.parse(data);
+            },
+            async:false
+        });
+        console.log(dataParsed);
 
         var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -29,42 +63,20 @@
         var config = {
             type: 'line',
             data: {
-                labels: ['day1', 'day2', 'day3', 'day4', 'day5', 'day6'],  // x
+                labels: dataParsed.persons,  // x
                 datasets: [{
-                    label: 'Alex',
+                    label: 'Danger of not working',
                     backgroundColor: window.chartColors.red,
                     borderColor: window.chartColors.red,
-                    data: [
-                        12, // aici o sa pun fx
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor()
-                    ],
+                    data: dataParsed.mean,
                     fill: false,
-                }, {
-                    label: 'Mihai',
-                    fill: false,
-                    backgroundColor: window.chartColors.blue,
-                    borderColor: window.chartColors.blue,
-                    data: [
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor(),
-                        randomScalingFactor()
-                    ],
                 }]
             },
             options: {
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'Chart.js Line Chart'
+                    text: 'Repartitie '+startDate+'  la  '+endDate
                 },
                 tooltips: {
                     mode: 'index',
@@ -164,7 +176,6 @@
         });
 
     </script>
-
 
 
 </body>
